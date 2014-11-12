@@ -70,7 +70,6 @@
     <Compile Include="Carrier.cs" />
     <Compile Include="City.cs" />
     <Compile Include="Flight.cs" />
-    <Compile Include="flights.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SamplePage.aspx.cs">
       <DependentUpon>SamplePage.aspx</DependentUpon>
