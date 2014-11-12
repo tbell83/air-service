@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "air-service", "air-service.csproj", "{B9A6DA36-B4FE-465B-BEB5-6356736B7DCD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TermProjectWS", "TermProjectWS.csproj", "{B9A6DA36-B4FE-465B-BEB5-6356736B7DCD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tools", "..\Tools\Tools.csproj", "{661AEA78-B1A0-4A02-998C-563D493456B4}"
 EndProject
