@@ -57,12 +57,27 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AirService.asmx" />
+    <Content Include="SamplePage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="cities.cs" />
+    <Compile Include="Airport.cs" />
+    <Compile Include="AirService.asmx.cs">
+      <DependentUpon>AirService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Carrier.cs" />
+    <Compile Include="City.cs" />
     <Compile Include="flights.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SamplePage.aspx.cs">
+      <DependentUpon>SamplePage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SamplePage.aspx.designer.cs">
+      <DependentUpon>SamplePage.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Web.Debug.config">
@@ -81,6 +96,9 @@
       <Project>{6ed444cf-ac93-4f84-941e-a7fade860c14}</Project>
       <Name>Utilities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
