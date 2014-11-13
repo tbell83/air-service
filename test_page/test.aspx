@@ -11,7 +11,12 @@
     <form id="form1" runat="server">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                <asp:GridView ID="gvCarriers" runat="server" CssClass="table"/>
+                <asp:GridView ID="gvCarriers" runat="server" CssClass="table" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <asp:GridView ID="gvFindFlights" runat="server" CssClass="table" />
             </div>
         </div>
     </form>

@@ -152,22 +152,32 @@ namespace test_page.AirService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/FindFlights", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataSet FindFlights() {
-            object[] results = this.Invoke("FindFlights", new object[0]);
+        public System.Data.DataSet FindFlights(string[] requirements, string originCityName, string originState, string destinationCityName, string destinationState) {
+            object[] results = this.Invoke("FindFlights", new object[] {
+                        requirements,
+                        originCityName,
+                        originState,
+                        destinationCityName,
+                        destinationState});
             return ((System.Data.DataSet)(results[0]));
         }
         
         /// <remarks/>
-        public void FindFlightsAsync() {
-            this.FindFlightsAsync(null);
+        public void FindFlightsAsync(string[] requirements, string originCityName, string originState, string destinationCityName, string destinationState) {
+            this.FindFlightsAsync(requirements, originCityName, originState, destinationCityName, destinationState, null);
         }
         
         /// <remarks/>
-        public void FindFlightsAsync(object userState) {
+        public void FindFlightsAsync(string[] requirements, string originCityName, string originState, string destinationCityName, string destinationState, object userState) {
             if ((this.FindFlightsOperationCompleted == null)) {
                 this.FindFlightsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFindFlightsOperationCompleted);
             }
-            this.InvokeAsync("FindFlights", new object[0], this.FindFlightsOperationCompleted, userState);
+            this.InvokeAsync("FindFlights", new object[] {
+                        requirements,
+                        originCityName,
+                        originState,
+                        destinationCityName,
+                        destinationState}, this.FindFlightsOperationCompleted, userState);
         }
         
         private void OnFindFlightsOperationCompleted(object arg) {
