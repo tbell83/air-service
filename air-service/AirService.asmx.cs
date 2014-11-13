@@ -21,11 +21,17 @@ namespace air_service{
         DBConnect objDB = new DBConnect();
         SqlCommand objCommand = new SqlCommand();
 
+        DataSet tempFill = new DataSet();
+
         //This function returns a list of air carriers from a table in your database for a given city and state. The Dataset returned by the function consists of fields that are unknown to the user of your web service. You need to create a simple HTML or ASPX page named (ServiceDesription.html or .aspx) that explains the usage of your web service, and publish it to the same folder the ASMX file will be located TermProjectWS. 
         [WebMethod]
-        public DataSet GetAirCarriers(int departureCity, string departureState, int arrivalCity, string arrivalState){
+        public DataSet GetAirCarriers(string originCityName, string originState, string destinationCityName, string destinationState){
             objCommand.CommandType = CommandType.StoredProcedure;
             objCommand.CommandText = "GetAirCarriers";
+            objCommand.Parameters.AddWithValue("@originCity", originCityName);
+            objCommand.Parameters.AddWithValue("@originState", originState);
+            objCommand.Parameters.AddWithValue("@destinationCity", destinationCityName);
+            objCommand.Parameters.AddWithValue("@destinationState", destinationState);
             DataSet carriers = objDB.GetDataSetUsingCmdObj(objCommand);
             return carriers;
         }
