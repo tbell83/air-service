@@ -47,8 +47,21 @@ namespace air_service{
         //This function accepts as input either an object of a class that represents the requirements for a flight, or an array of items representing each amenity they want like non-stop or first-class seating, and returns a DataSet containing records that meet the requirements. You must provide pricing for each record that will be used by the customer booking the trip and the web application to calculate the total cost.
         //(requirements As Object, Departure City, Departure State, Arrival City, Arrival State) 
         [WebMethod]
-        public DataSet FindFlights(){
-            return tempFill;
+        public DataSet FindFlights(string[] requirements, string originCityName, string originState, string destinationCityName, string destinationState){
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "FindFlights";
+            objCommand.Parameters.AddWithValue("@originCity", originCityName);
+            objCommand.Parameters.AddWithValue("@originState", originState);
+            objCommand.Parameters.AddWithValue("@destinationCity", destinationCityName);
+            objCommand.Parameters.AddWithValue("@destinationState", destinationState);
+            DataSet flights = objDB.GetDataSetUsingCmdObj(objCommand);
+            foreach (string item in requirements){
+                if (item == "First Class"){
+                    flights.Tables[0].Columns.RemoveAt(7);
+                    flights.Tables[0].Columns.RemoveAt(5);
+                }
+            }
+            return flights;
         }
 
         //This function accepts a FlightID for the flight the user wants to reserve, and a customer. The function updates the necessary tables to record the flight’s reservation.

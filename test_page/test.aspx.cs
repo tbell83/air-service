@@ -12,6 +12,10 @@ namespace test_page{
         protected void Page_Load(object sender, EventArgs e){
             gvCarriers.DataSource=AirService.GetAirCarriers("Philadelphia","PA","Las Vegas","NV");
             gvCarriers.DataBind();
+
+            string[] requirements = new string[] {"First Class"};
+            gvFindFlights.DataSource=AirService.FindFlights(requirements, "Philadelphia","PA","Las Vegas","NV");
+            gvFindFlights.DataBind();
         }
     }
 }
