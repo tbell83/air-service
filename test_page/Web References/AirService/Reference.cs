@@ -125,22 +125,32 @@ namespace test_page.AirService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetFlights", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataSet GetFlights() {
-            object[] results = this.Invoke("GetFlights", new object[0]);
+        public System.Data.DataSet GetFlights(int carrierID, string departureCity, string departureState, string arrivalCity, string arrivalState) {
+            object[] results = this.Invoke("GetFlights", new object[] {
+                        carrierID,
+                        departureCity,
+                        departureState,
+                        arrivalCity,
+                        arrivalState});
             return ((System.Data.DataSet)(results[0]));
         }
         
         /// <remarks/>
-        public void GetFlightsAsync() {
-            this.GetFlightsAsync(null);
+        public void GetFlightsAsync(int carrierID, string departureCity, string departureState, string arrivalCity, string arrivalState) {
+            this.GetFlightsAsync(carrierID, departureCity, departureState, arrivalCity, arrivalState, null);
         }
         
         /// <remarks/>
-        public void GetFlightsAsync(object userState) {
+        public void GetFlightsAsync(int carrierID, string departureCity, string departureState, string arrivalCity, string arrivalState, object userState) {
             if ((this.GetFlightsOperationCompleted == null)) {
                 this.GetFlightsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetFlightsOperationCompleted);
             }
-            this.InvokeAsync("GetFlights", new object[0], this.GetFlightsOperationCompleted, userState);
+            this.InvokeAsync("GetFlights", new object[] {
+                        carrierID,
+                        departureCity,
+                        departureState,
+                        arrivalCity,
+                        arrivalState}, this.GetFlightsOperationCompleted, userState);
         }
         
         private void OnGetFlightsOperationCompleted(object arg) {
