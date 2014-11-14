@@ -30,7 +30,7 @@
 
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                &nbsp;&nbsp;&nbsp;&nbsp; Customer:&nbsp;
+               <%-- &nbsp;&nbsp;&nbsp;&nbsp; Customer:&nbsp;
                 <asp:DropDownList ID="ddlCustomers" runat="server">
                 </asp:DropDownList>
                 &nbsp;&nbsp;&nbsp;
@@ -45,8 +45,17 @@
                 &nbsp;&nbsp;&nbsp;
                 Flight 2/ Returning flight: (optional) 
                 <asp:DropDownList ID="ddlReturningFlightID" runat="server">
-                </asp:DropDownList>
+                </asp:DropDownList>--%>
                 
+                Inputs hardcoded into test.aspx.cs for when you press "Make Reservation": <br />
+                int custID = 2; <br />
+                int flightID1 = 3; <br />
+                string seatType1 = "Economy"; <br />
+                string flightDate1 = "11/22/2014"; <br />
+                int flightID2 = 5; <br />
+                string seatType2 = "First Class"; <br />
+                string flightDate2 = "11/24/2014"; <br />
+
                 <br />
                 <br />
                 <asp:Button ID="btnReserve" runat="server" Text="Make Reservation" OnClick="btnReserve_Click" />
