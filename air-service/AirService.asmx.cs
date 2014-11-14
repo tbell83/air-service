@@ -100,12 +100,102 @@ namespace air_service{
             return flights;
         }
 
-        //This function accepts a FlightID for the flight the user wants to reserve, and a customer. The function updates the necessary tables to record the flight’s reservation.
-        //You need to have the ability to book one-way flights and two-way flights.
-        // (flight As Object, customer as Object)
+
         [WebMethod]
-        public Boolean Reserve(){
-            return true; 
+        public Boolean Reserve(int customerID, int flightID1, string seatType1, int flightID2 = 0, string seatType2= null)  //default params for flightID2 and seatType2 make them optional
+        {
+            bool success = true; 
+
+            //create trip for customer with tripID as output parameter
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "CreateTrip";
+
+            SqlParameter inputParam_customerID = new SqlParameter("@customerID", customerID);
+            inputParam_customerID.Direction = ParameterDirection.Input;
+            inputParam_customerID.SqlDbType = SqlDbType.Int;
+            inputParam_customerID.Size = 4;
+            objCommand.Parameters.Add(inputParam_customerID); 
+
+            SqlParameter outputParam_tripID = new SqlParameter("@tripID", DbType.Int32);
+            outputParam_tripID.Direction = ParameterDirection.Output;
+            objCommand.Parameters.Add(outputParam_tripID);
+
+            //execute stored procedure
+            try { objDB.DoUpdateUsingCmdObj(objCommand); }
+            catch (Exception e) 
+            { 
+                success = false;
+                return success; 
+            }
+            
+            //get tripID, to be used in creating reservations
+            int tripID = int.Parse(objCommand.Parameters["@tripID"].Value.ToString());  
+            
+            //create first reservation
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "CreateReservation";
+
+            SqlParameter inputParam_tripID = new SqlParameter("@tripID", tripID);
+            inputParam_tripID.Direction = ParameterDirection.Input;
+            inputParam_tripID.SqlDbType = SqlDbType.Int;
+            inputParam_tripID.Size = 4;
+
+            SqlParameter inputParam_flightID1 = new SqlParameter("@flightID", flightID1);
+            inputParam_flightID1.Direction = ParameterDirection.Input;
+            inputParam_flightID1.SqlDbType = SqlDbType.Int;
+            inputParam_flightID1.Size = 4; //4 bytes
+
+            SqlParameter inputParam_seatType1 = new SqlParameter("@seatType", seatType1);
+            inputParam_seatType1.Direction = ParameterDirection.Input;
+            inputParam_seatType1.SqlDbType = SqlDbType.VarChar;
+            inputParam_seatType1.Size = 50;
+
+            objCommand.Parameters.Add(inputParam_tripID);
+            objCommand.Parameters.Add(inputParam_flightID1);
+            objCommand.Parameters.Add(inputParam_seatType1);
+
+            //execute stored procedure
+            try { objDB.DoUpdateUsingCmdObj(objCommand); }
+            catch (Exception e) 
+            { 
+                success = false;
+                return success; 
+            }
+
+            if (flightID2 > 0)  //will give flightID2 a default val of 0 
+            {
+                //create second reservation
+                objCommand.CommandType = CommandType.StoredProcedure;
+                objCommand.CommandText = "CreateReservation";
+
+                SqlParameter inputParam_tripID2 = new SqlParameter("@tripID", tripID);
+                inputParam_tripID.Direction = ParameterDirection.Input;
+                inputParam_tripID.SqlDbType = SqlDbType.Int;
+                inputParam_tripID.Size = 4;
+
+                SqlParameter inputParam_flightID2 = new SqlParameter("@flightID", flightID2);
+                inputParam_flightID1.Direction = ParameterDirection.Input;
+                inputParam_flightID1.SqlDbType = SqlDbType.Int;
+                inputParam_flightID1.Size = 4; //4 bytes
+
+                SqlParameter inputParam_seatType2 = new SqlParameter("@seatType", seatType2);
+                inputParam_seatType1.Direction = ParameterDirection.Input;
+                inputParam_seatType1.SqlDbType = SqlDbType.VarChar;
+                inputParam_seatType1.Size = 50;
+
+                objCommand.Parameters.Add(inputParam_tripID2);
+                objCommand.Parameters.Add(inputParam_flightID2);
+                objCommand.Parameters.Add(inputParam_seatType2);
+
+                //execute stored procedure
+                try { objDB.DoUpdateUsingCmdObj(objCommand); }
+                catch (Exception e) 
+                { 
+                    success = false;
+                    return success; 
+                }            
+            }
+            return success; //returns true for function successful
         }
     }
 }
