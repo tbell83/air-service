@@ -199,7 +199,6 @@ namespace air_service{
             return success; //returns true for function successful
         }
 
-
         [WebMethod]
         public DataSet GetTable(string tableName)
         {
@@ -207,5 +206,26 @@ namespace air_service{
             return objDB.GetDataSet(strSQL);
         }
 
+        private bool CheckAvailability(int flightID, DateTime flightDate, string seatClass){
+            bool output = false;
+            objCommand.CommandType = CommandType.StoredProcedure;
+
+            if(seatClass == "Economy"){
+                objCommand.CommandText = "CheckEconomyAvailability";
+            }else if(seatClass == "First Class"){
+                objCommand.CommandText = "CheckFirstClassAvailability";
+            }
+
+            objCommand.Parameters.AddWithValue("@flightID", flightID);
+            objCommand.Parameters.AddWithValue("@flightDate", flightDate);
+            DataSet availability = objDB.GetDataSetUsingCmdObj(objCommand);
+            int available = int.Parse(availability.Tables[0].Rows[0][0].ToString());
+
+            if (available > 0){
+                output = true;
+            }
+
+            return output;
+        }
     }
 }
