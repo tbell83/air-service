@@ -19,6 +19,14 @@
                 <asp:GridView ID="gvFindFlights" runat="server" CssClass="table" />
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                Inputs used (hardcoded): carrierID = 1 (Delta Blue); Departure City: "Philadelphia"; Departure State= "PA"; Destination City = "Las Vegas"; Destination State = "NV" 
+
+                <asp:GridView ID="gvGetFlights" runat="server" CssClass="table" />
+            </div>
+        </div>
     </form>
 </body>
 </html>

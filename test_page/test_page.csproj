@@ -70,13 +70,8 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </Content>
-    <None Include="Web References\AirService\AirService.disco" />
+    <Content Include="Web References\AirService\AirService.disco" />
     <Content Include="Web.config" />
-    <None Include="Web References\AirService\AirService.wsdl" />
-    <None Include="Web References\AirService\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -104,6 +99,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="css\bootstrap-theme.css.map" />
     <Content Include="css\bootstrap.css.map" />
+    <Content Include="Web References\AirService\AirService.wsdl" />
+    <Content Include="Web References\AirService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
