@@ -20,9 +20,7 @@ namespace air_service{
     public class AirService : System.Web.Services.WebService{
         DBConnect objDB = new DBConnect();
         SqlCommand objCommand = new SqlCommand();
-        string strSQL; 
-
-
+        string strSQL;
 
         //This function returns a list of air carriers from a table in your database for a given city and state. The Dataset returned by the function consists of fields that are unknown to the user of your web service. You need to create a simple HTML or ASPX page named (ServiceDesription.html or .aspx) that explains the usage of your web service, and publish it to the same folder the ASMX file will be located TermProjectWS. 
         [WebMethod]
@@ -96,6 +94,9 @@ namespace air_service{
                 if (item == "First Class"){
                     flights.Tables[0].Columns.RemoveAt(7);
                     flights.Tables[0].Columns.RemoveAt(5);
+                }else if(item == "Economy"){
+                    flights.Tables[0].Columns.RemoveAt(8);
+                    flights.Tables[0].Columns.RemoveAt(6);
                 }
             }
             return flights;
