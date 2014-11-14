@@ -103,10 +103,22 @@ namespace air_service{
 
 
         [WebMethod]
-        public Boolean Reserve(int customerID, int flightID1, string seatType1, int flightID2 = 0, string seatType2= null)  //default params for flightID2 and seatType2 make them optional
+        public Boolean Reserve(int customerID, int flightID1, string seatType1, string dt1, int flightID2 = 0, string seatType2= null, string dt2 = "01/01/2015")  //default params for flightID2, seatType2, dt2 make them optional
         {
-            bool success = true; 
+            DateTime flightDate1 = Convert.ToDateTime(dt1);
+            DateTime flightDate2 = Convert.ToDateTime(dt2);
+            bool success;
+            if (CheckAvailability(flightID1, flightDate1, seatType1) && CheckAvailability(flightID2, flightDate2, seatType2))
+            {
+                success = true;
+            }
+            else
+            {
+                success = false;
+                return success;
+            }
 
+       
             //create trip for customer with tripID as output parameter
             objCommand.CommandType = CommandType.StoredProcedure;
             objCommand.CommandText = "CreateTrip";
@@ -133,8 +145,9 @@ namespace air_service{
             int tripID = int.Parse(objCommand.Parameters["@tripID"].Value.ToString());  
             
             //create first reservation
-            objCommand.CommandType = CommandType.StoredProcedure;
-            objCommand.CommandText = "CreateReservation";
+            SqlCommand objCommand2 = new SqlCommand(); 
+            objCommand2.CommandType = CommandType.StoredProcedure;
+            objCommand2.CommandText = "CreateReservation";
 
             SqlParameter inputParam_tripID = new SqlParameter("@tripID", tripID);
             inputParam_tripID.Direction = ParameterDirection.Input;
@@ -151,23 +164,30 @@ namespace air_service{
             inputParam_seatType1.SqlDbType = SqlDbType.VarChar;
             inputParam_seatType1.Size = 50;
 
-            objCommand.Parameters.Add(inputParam_tripID);
-            objCommand.Parameters.Add(inputParam_flightID1);
-            objCommand.Parameters.Add(inputParam_seatType1);
+            SqlParameter inputParam_flightDate1 = new SqlParameter("@flightDate", flightDate1);
+            inputParam_flightDate1.Direction = ParameterDirection.Input;
+            inputParam_flightDate1.SqlDbType = SqlDbType.DateTime; 
+            inputParam_flightDate1.Size = 50;
+
+            objCommand2.Parameters.Add(inputParam_tripID);
+            objCommand2.Parameters.Add(inputParam_flightID1);
+            objCommand2.Parameters.Add(inputParam_seatType1);
+            objCommand2.Parameters.Add(inputParam_flightDate1);
 
             //execute stored procedure
-            try { objDB.DoUpdateUsingCmdObj(objCommand); }
-            catch (Exception e) 
-            { 
+            try { objDB.DoUpdateUsingCmdObj(objCommand2); }
+            catch (Exception e)
+            {
                 success = false;
-                return success; 
+                return success;
             }
 
             if (flightID2 > 0)  //will give flightID2 a default val of 0 
             {
                 //create second reservation
-                objCommand.CommandType = CommandType.StoredProcedure;
-                objCommand.CommandText = "CreateReservation";
+                SqlCommand objCommand3 = new SqlCommand();
+                objCommand3.CommandType = CommandType.StoredProcedure;
+                objCommand3.CommandText = "CreateReservation";
 
                 SqlParameter inputParam_tripID2 = new SqlParameter("@tripID", tripID);
                 inputParam_tripID.Direction = ParameterDirection.Input;
@@ -184,16 +204,22 @@ namespace air_service{
                 inputParam_seatType1.SqlDbType = SqlDbType.VarChar;
                 inputParam_seatType1.Size = 50;
 
-                objCommand.Parameters.Add(inputParam_tripID2);
-                objCommand.Parameters.Add(inputParam_flightID2);
-                objCommand.Parameters.Add(inputParam_seatType2);
+                SqlParameter inputParam_flightDate2 = new SqlParameter("@flightDate", flightDate2);
+                inputParam_flightDate2.Direction = ParameterDirection.Input;
+                inputParam_flightDate2.SqlDbType = SqlDbType.DateTime;
+                inputParam_flightDate2.Size = 50;
+
+                objCommand3.Parameters.Add(inputParam_tripID2);
+                objCommand3.Parameters.Add(inputParam_flightID2);
+                objCommand3.Parameters.Add(inputParam_seatType2);
+                objCommand3.Parameters.Add(inputParam_flightDate2);
 
                 //execute stored procedure
-                try { objDB.DoUpdateUsingCmdObj(objCommand); }
-                catch (Exception e) 
-                { 
+                try { objDB.DoUpdateUsingCmdObj(objCommand3); }
+                catch (Exception e)
+                {
                     success = false;
-                    return success; 
+                    return success;
                 }            
             }
             return success; //returns true for function successful
@@ -208,17 +234,18 @@ namespace air_service{
 
         private bool CheckAvailability(int flightID, DateTime flightDate, string seatClass){
             bool output = false;
-            objCommand.CommandType = CommandType.StoredProcedure;
+            SqlCommand objCommandCheck = new SqlCommand(); 
+            objCommandCheck.CommandType = CommandType.StoredProcedure;
 
             if(seatClass == "Economy"){
-                objCommand.CommandText = "CheckEconomyAvailability";
+                objCommandCheck.CommandText = "CheckEconomyAvailability";
             }else if(seatClass == "First Class"){
-                objCommand.CommandText = "CheckFirstClassAvailability";
+                objCommandCheck.CommandText = "CheckFirstClassAvailability";
             }
 
-            objCommand.Parameters.AddWithValue("@flightID", flightID);
-            objCommand.Parameters.AddWithValue("@flightDate", flightDate);
-            DataSet availability = objDB.GetDataSetUsingCmdObj(objCommand);
+            objCommandCheck.Parameters.AddWithValue("@flightID", flightID);
+            objCommandCheck.Parameters.AddWithValue("@flightDate", flightDate);
+            DataSet availability = objDB.GetDataSetUsingCmdObj(objCommandCheck);
             int available = int.Parse(availability.Tables[0].Rows[0][0].ToString());
 
             if (available > 0){
