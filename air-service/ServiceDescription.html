@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+<h1>Air Service API Description</h1>
+<h2>Methods</h2>
+<ul>
+    <li>
+        <h3>GetAirCarriers</h3>
+        <h5>Inputs</h5>
+        <table border="1">
+            <tr><th>Datatype</th><th>Name</th><th>Description</th></tr>
+            <tr><td>string</td><td>originCityName</td><td>Name of the city in which the flight is originating, case sensitive, first letter capitalized, subsequent letters lowercase</td></tr>
+            <tr><td>string</td><td>originState</td><td>Two letter abbreviation of the State where the flight is originating, case sensitive, uppercase</td></tr>
+            <tr><td>string</td><td>destinationCityName</td><td>Name of the city in which the flight is landing, case sensitive, first letter capitalized, subsequent letters lowercase</td></tr>
+            <tr><td>string</td><td>destinationState</td><td>Two letter abbreviation of the State where the flight is originating, case sensitive, uppercase</td></tr>
+        </table>
+        <h5>Description</h5><p>This method takes string values for origin and destination city and state and returns a dataset of carriers available along that route.  The returned dataset contains two columns; carrierID as INT and carrierName as STRING</p>
+    </li>
+    <li>
+        <h3>GetFlights</h3>
+        <h5>Inputs</h5>
+        <table border="1">
+            <tr><th>Datatype</th><th>Name</th><th>Description</th></tr>
+            <tr><td>int</td><td>carrierID</td><td>Integer ID of the carrier for which flights are being requested</td></tr>
+            <tr><td>string</td><td>originCityName</td><td>Name of the city in which the flight is originating, case sensitive, first letter capitalized, subsequent letters lowercase</td></tr>
+            <tr><td>string</td><td>originState</td><td>Two letter abbreviation of the State where the flight is originating, case sensitive, uppercase</td></tr>
+            <tr><td>string</td><td>destinationCityName</td><td>Name of the city in which the flight is landing, case sensitive, first letter capitalized, subsequent letters lowercase</td></tr>
+            <tr><td>string</td><td>destinationState</td><td>Two letter abbreviation of the State where the flight is originating, case sensitive, uppercase</td></tr>
+        </table>
+        <h5>Description</h5><p>This method takes an integer value for the carrier ID, string values for origin and destination city and state and returns a dataset of flights available along that route.  The returned dataset contains eight columns; flightCode as STRING, carrierName as STRING, OriginCity as STRING, departureTime as DateTime, flightTime as FLOAT, economyPrice as double and firstClassPrice as double</p>
+    </li>
+    <li>
+        <h3>FindFlights</h3>
+        <h5>Inputs</h5>
+        <table border="1">
+            <tr><th>Datatype</th><th>Name</th><th>Description</th></tr>
+            <tr><td>string[]</td><td>requirements</td><td>string array of any requirements for the flight, &quot;Economy&quot; or &quot;First Class&quot; will be processed </td></tr>
+            <tr><td>string</td><td>originCityName</td><td>Name of the city in which the flight is originating, case sensitive, first letter capitalized, subsequent letters lowercase</td></tr>
+            <tr><td>string</td><td>originState</td><td>Two letter abbreviation of the State where the flight is originating, case sensitive, uppercase</td></tr>
+            <tr><td>string</td><td>destinationCityName</td><td>Name of the city in which the flight is landing, case sensitive, first letter capitalized, subsequent letters lowercase</td></tr>
+            <tr><td>string</td><td>destinationState</td><td>Two letter abbreviation of the State where the flight is originating, case sensitive, uppercase</td></tr>
+        </table>
+        <h5>Description</h5><p>ts string[] will process the values &quot;Economy&quot; or &quot;First Class&quot; to determine the price to return in the dataset.  The returned dataset contains seven columns, flightID as INT, carrierName as STRING, OriginCity as STRING, DestinationCity as STRING, departureTime as DateTime, Price for selected class as FLOAT, number of seats available on plane as INT</p>
+    </li>
+    <li>
+        <h3>Reserve</h3>
+        <h5>Inputs</h5>
+        <table border="1">
+            <tr><th>Datatype</th><th>Name</th><th>Description</th></tr>
+            <tr><td>int</td><td>customerID</td><td></td></tr>
+            <tr><td>int</td><td>Outgoing Flight ID</td><td></td></tr>
+            <tr><td>string</td><td>Outgoing Seat Type</td><td></td></tr>
+            <tr><td>string</td><td>Outgoing Flight Date</td><td></td></tr>
+            <tr><td>int</td><td>Returning Flight ID</td><td></td></tr>
+            <tr><td>string</td><td>Returning Seat Type</td><td></td></tr>
+            <tr><td>string</td><td>Returning Flight Date</td><td></td></tr>
+         </table>
+        <h5>Description</h5><p>This function accepts a customerID, a flight ID, a seat type("Economy" or "First Class"), a date as string, and optionally a returning flight ID, returing Seat Type and returning Flight Date.  It returns true or false based on its success or failure in creating the reservation.</p>
+    </li>
+</ul>
+</body>
+</html>
