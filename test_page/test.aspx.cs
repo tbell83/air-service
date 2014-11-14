@@ -18,8 +18,34 @@ namespace test_page{
             gvFindFlights.DataBind();
 
             gvGetFlights.DataSource = AirService.GetFlights(1, "Philadelphia", "PA", "Las Vegas", "NV");
-            gvGetFlights.DataBind(); 
+            gvGetFlights.DataBind();
 
+            ddlCustomers.DataSource = AirService.GetTable("airService_Customers");
+            ddlCustomers.DataTextField = "customerName";
+            ddlCustomers.DataValueField = "customerID";
+            ddlCustomers.DataBind();
+
+            ddlOutgoingFlightID.DataSource = AirService.GetTable("airService_Flights");
+            ddlOutgoingFlightID.DataTextField = "flightID";
+            ddlOutgoingFlightID.DataValueField = "flightID";
+            ddlOutgoingFlightID.DataBind();
+
+            ddlReturningFlightID.DataSource = AirService.GetTable("airService_Flights");
+            ddlReturningFlightID.DataTextField = "flightID";
+            ddlReturningFlightID.DataValueField = "flightID";
+            ddlReturningFlightID.DataBind();
+
+        }
+
+        protected void btnReserve_Click(object sender, EventArgs e)
+        {
+            int custID = int.Parse(ddlCustomers.SelectedValue);
+            int flightID1 = int.Parse(ddlOutgoingFlightID.SelectedValue);
+            string seatType1 = "Economy";
+            int flightID2 = int.Parse(ddlReturningFlightID.SelectedValue);
+            string seatType2 = "First Class";
+
+            AirService.Reserve(custID, flightID1, seatType1, flightID2, seatType2); 
         }     
     }
 }
