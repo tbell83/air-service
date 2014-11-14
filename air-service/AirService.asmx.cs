@@ -104,6 +104,8 @@ namespace air_service{
         [WebMethod]
         public Boolean Reserve(int customerID, int flightID1, string seatType1, int flightID2 = 0, string seatType2= null)  //default params for flightID2 and seatType2 make them optional
         {
+            bool success = true; 
+
             //create trip for customer with tripID as output parameter
             objCommand.CommandType = CommandType.StoredProcedure;
             objCommand.CommandText = "CreateTrip";
@@ -119,12 +121,16 @@ namespace air_service{
             objCommand.Parameters.Add(outputParam_tripID);
 
             //execute stored procedure
-            objDB.DoUpdateUsingCmdObj(objCommand); 
-
+            try { objDB.DoUpdateUsingCmdObj(objCommand); }
+            catch (Exception e) 
+            { 
+                success = false;
+                return success; 
+            }
+            
             //get tripID, to be used in creating reservations
             int tripID = int.Parse(objCommand.Parameters["@tripID"].Value.ToString());  
             
-
             //create first reservation
             objCommand.CommandType = CommandType.StoredProcedure;
             objCommand.CommandText = "CreateReservation";
@@ -147,8 +153,14 @@ namespace air_service{
             objCommand.Parameters.Add(inputParam_tripID);
             objCommand.Parameters.Add(inputParam_flightID1);
             objCommand.Parameters.Add(inputParam_seatType1);
-             
-            objDB.DoUpdateUsingCmdObj(objCommand);  //execute stored procedure
+
+            //execute stored procedure
+            try { objDB.DoUpdateUsingCmdObj(objCommand); }
+            catch (Exception e) 
+            { 
+                success = false;
+                return success; 
+            }
 
             if (flightID2 > 0)  //will give flightID2 a default val of 0 
             {
@@ -175,11 +187,15 @@ namespace air_service{
                 objCommand.Parameters.Add(inputParam_flightID2);
                 objCommand.Parameters.Add(inputParam_seatType2);
 
-                objDB.DoUpdateUsingCmdObj(objCommand);  //execute stored procedure
-
-                return true; 
+                //execute stored procedure
+                try { objDB.DoUpdateUsingCmdObj(objCommand); }
+                catch (Exception e) 
+                { 
+                    success = false;
+                    return success; 
+                }            
             }
- 
+            return success; //returns true for function successful
         }
     }
 }
