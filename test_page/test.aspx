@@ -27,6 +27,34 @@
                 <asp:GridView ID="gvGetFlights" runat="server" CssClass="table" />
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                &nbsp;&nbsp;&nbsp;&nbsp; Customer:&nbsp;
+                <asp:DropDownList ID="ddlCustomers" runat="server">
+                </asp:DropDownList>
+                &nbsp;&nbsp;&nbsp;
+                <br />
+                <br />
+                &nbsp;&nbsp;&nbsp;
+                Flight 1/ Outgoing flight: 
+                <asp:DropDownList ID="ddlOutgoingFlightID" runat="server">
+                </asp:DropDownList>
+                <br />
+                <br />
+                &nbsp;&nbsp;&nbsp;
+                Flight 2/ Returning flight: (optional) 
+                <asp:DropDownList ID="ddlReturningFlightID" runat="server">
+                </asp:DropDownList>
+                
+                <br />
+                <br />
+                <asp:Button ID="btnReserve" runat="server" Text="Make Reservation" OnClick="btnReserve_Click" />
+                <br />
+                <br />
+                
+            </div>
+        </div>
     </form>
 </body>
 </html>
