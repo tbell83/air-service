@@ -67,6 +67,7 @@
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\npm.js" />
     <Content Include="login.aspx" />
+    <Content Include="registration.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -84,7 +85,15 @@
     <Compile Include="master.Master.designer.cs">
       <DependentUpon>master.Master</DependentUpon>
     </Compile>
+    <Compile Include="password.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="registration.aspx.cs">
+      <DependentUpon>registration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="registration.aspx.designer.cs">
+      <DependentUpon>registration.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
