@@ -1,0 +1,35 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="master.master.cs" Inherits="TermProject.master" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/master.css" rel="stylesheet" />
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/add_asset_popup.js"></script>
+    <title>TermProject - Tom and Lisa</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <div class="row">
+                <div class="col-md-12 header">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 content">
+                    <asp:ContentPlaceHolder ID="ASPX_content" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 footer">
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,16 @@
+﻿body {
+}
+
+.label {
+    color: black;
+}
+
+.btn-row {
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.checkbox-inline {
+    position:static;
+}
