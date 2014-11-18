@@ -38,6 +38,8 @@ namespace test_page.AirService {
         
         private System.Threading.SendOrPostCallback ReserveOperationCompleted;
         
+        private System.Threading.SendOrPostCallback GetTableOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -87,6 +89,9 @@ namespace test_page.AirService {
         
         /// <remarks/>
         public event ReserveCompletedEventHandler ReserveCompleted;
+        
+        /// <remarks/>
+        public event GetTableCompletedEventHandler GetTableCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetAirCarriers", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -199,28 +204,71 @@ namespace test_page.AirService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/Reserve", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public bool Reserve() {
-            object[] results = this.Invoke("Reserve", new object[0]);
+        public bool Reserve(int customerID, int flightID1, string seatType1, string dt1, int flightID2, string seatType2, string dt2) {
+            object[] results = this.Invoke("Reserve", new object[] {
+                        customerID,
+                        flightID1,
+                        seatType1,
+                        dt1,
+                        flightID2,
+                        seatType2,
+                        dt2});
             return ((bool)(results[0]));
         }
         
         /// <remarks/>
-        public void ReserveAsync() {
-            this.ReserveAsync(null);
+        public void ReserveAsync(int customerID, int flightID1, string seatType1, string dt1, int flightID2, string seatType2, string dt2) {
+            this.ReserveAsync(customerID, flightID1, seatType1, dt1, flightID2, seatType2, dt2, null);
         }
         
         /// <remarks/>
-        public void ReserveAsync(object userState) {
+        public void ReserveAsync(int customerID, int flightID1, string seatType1, string dt1, int flightID2, string seatType2, string dt2, object userState) {
             if ((this.ReserveOperationCompleted == null)) {
                 this.ReserveOperationCompleted = new System.Threading.SendOrPostCallback(this.OnReserveOperationCompleted);
             }
-            this.InvokeAsync("Reserve", new object[0], this.ReserveOperationCompleted, userState);
+            this.InvokeAsync("Reserve", new object[] {
+                        customerID,
+                        flightID1,
+                        seatType1,
+                        dt1,
+                        flightID2,
+                        seatType2,
+                        dt2}, this.ReserveOperationCompleted, userState);
         }
         
         private void OnReserveOperationCompleted(object arg) {
             if ((this.ReserveCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ReserveCompleted(this, new ReserveCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetTable", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataSet GetTable(string tableName) {
+            object[] results = this.Invoke("GetTable", new object[] {
+                        tableName});
+            return ((System.Data.DataSet)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetTableAsync(string tableName) {
+            this.GetTableAsync(tableName, null);
+        }
+        
+        /// <remarks/>
+        public void GetTableAsync(string tableName, object userState) {
+            if ((this.GetTableOperationCompleted == null)) {
+                this.GetTableOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetTableOperationCompleted);
+            }
+            this.InvokeAsync("GetTable", new object[] {
+                        tableName}, this.GetTableOperationCompleted, userState);
+        }
+        
+        private void OnGetTableOperationCompleted(object arg) {
+            if ((this.GetTableCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetTableCompleted(this, new GetTableCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -343,6 +391,32 @@ namespace test_page.AirService {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    public delegate void GetTableCompletedEventHandler(object sender, GetTableCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetTableCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetTableCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataSet Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataSet)(this.results[0]));
             }
         }
     }

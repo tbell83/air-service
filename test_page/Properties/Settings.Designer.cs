@@ -26,7 +26,8 @@ namespace test_page.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:51289/AirService.asmx")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://cis-iis2.temple.edu/Fall2014/cis3342_tuf01657/TermProjectWS/AirService.asm" +
+            "x")]
         public string test_page_AirService_AirService {
             get {
                 return ((string)(this["test_page_AirService_AirService"]));

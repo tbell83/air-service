@@ -104,6 +104,7 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
+    <None Include="Properties\PublishProfiles\jksd.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -118,10 +119,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://localhost:51289/AirService.asmx">
+    <WebReferenceUrl Include="http://cis-iis2.temple.edu/Fall2014/cis3342_tuf01657/TermProjectWS/AirService.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\AirService\</RelPath>
-      <UpdateFromURL>http://localhost:51289/AirService.asmx</UpdateFromURL>
+      <UpdateFromURL>http://cis-iis2.temple.edu/Fall2014/cis3342_tuf01657/TermProjectWS/AirService.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
