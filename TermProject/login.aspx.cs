@@ -15,14 +15,15 @@ namespace TermProject{
         }
 
         protected void btnLogin_Click(object sender, EventArgs e){
-            if(chkRemember.Checked){
-                WriteCookie();
-            }else{
-                DeleteCookie();
-            }
 
             if(password.validateUser(txtUsername.Text, txtPassword.Text)){
                 Session["user"] = txtUsername.Text;
+                if(chkRemember.Checked){
+                    WriteCookie();
+                }else{
+                    DeleteCookie();
+                }
+                Response.Redirect("protected.aspx");
             }
         }
 
@@ -57,7 +58,7 @@ namespace TermProject{
         }
 
         protected void btnRegister_Click(Object sender, EventArgs e){
-            Response.Redirect("register.aspx"); 
+            Response.Redirect("registration.aspx"); 
         }
     }
 }
