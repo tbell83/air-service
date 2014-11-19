@@ -20,6 +20,10 @@ namespace TermProject{
             }else{
                 DeleteCookie();
             }
+
+            if(password.validateUser(txtUsername.Text, txtPassword.Text)){
+                Session["user"] = txtUsername.Text;
+            }
         }
 
         protected void WriteCookie(){
