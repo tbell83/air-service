@@ -138,7 +138,6 @@
     <Compile Include="hotel_rental.aspx.designer.cs">
       <DependentUpon>hotel_rental.aspx</DependentUpon>
     </Compile>
-    <Compile Include="VacationPackage.cs" />
     <Compile Include="Web References\AirService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
