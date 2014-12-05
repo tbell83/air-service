@@ -71,13 +71,13 @@
             </div>
             <br />
             <br />
-            <div class="row col-lg-offset-6 col-md-offset-6">
+        </div>
+        <div class="btn-row col-lg-12 col-md-12">
                 <p><asp:Button ID="btnSearch" runat="server" Text="Search Hotels" OnClick="btnSearch_Click" /></p>
-                <p><asp:Button ID="btnNewSearch" runat="server" Text="New Search" Visible="false" OnClick="btnNewSearch_Click" /></p>
+                <p><asp:Button ID="btnNewSearch" runat="server" Text="New Search" Visible="false" OnClick="btnNewSearch_Click"/></p>
                 <br />
                 <br />
                 <asp:Label ID="lblErrorMsg" runat="server" />
-        </div>
         </div>
         
         
@@ -88,7 +88,7 @@
         <br />
         <br />
         
-        <div class ="row col-lg-4  col-md-6">
+        <div class ="row col-lg-4  col-md-6" style="text-align:center">
             <p class="text-center"><span style ="font-size: large; font:bold" >Hotel List</span></p>
             <br />  
             <asp:GridView ID="gvHotel" runat="server" CssClass="table" />
