@@ -16,7 +16,32 @@ namespace TermProject
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["user"] == null)
+            {
+                unauthed.Visible = true;
+                Response.AddHeader("REFRESH", "50;URL=login.aspx");
+                Response.Redirect("login.aspx");
+            }
+            else
+            {
+                authed.Visible = true;
+                lblUsername.Text = "WELCOME BACK, " + Session["user"].ToString() + "!";
+            }
+        }
 
+        protected void btnSearchFlights_Click(object sender, EventArgs e)
+        {
+            //redirect to flight page
+        }
+
+        protected void btnSearchHotels_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("hotel_rental.aspx");
+        }
+
+        protected void btnSearchCars_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("car_rental.aspx");
         }
     }
 }

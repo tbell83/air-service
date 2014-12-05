@@ -23,7 +23,7 @@ namespace TermProject{
                 }else{
                     DeleteCookie();
                 }
-                Response.Redirect("protected.aspx");
+                Response.Redirect("dashboard.aspx");
             }
         }
 

@@ -88,11 +88,7 @@
         <div class="btn-row">
             <asp:GridView ID="gvAgencies" runat="server" CssClass="table" >
                 <Columns>
-                    <asp:TemplateField HeaderText="Cars By Agency">
-                        <ItemTemplate>
-                            <asp:Button ID="btnSearchByAgency" runat="server" Text="See All Cars" />
-                        </ItemTemplate>
-                    </asp:TemplateField>
+                    <asp:CommandField AccessibleHeaderText="Cars By Agency" ButtonType="Button" HeaderText="Cars By Agency" SelectText="See All Cars" ShowSelectButton="True" />
                 </Columns>
             </asp:GridView>
             <br />
@@ -102,6 +98,7 @@
     <div class="row col-lg-3 col-lg-offset-1 col-md-12" style="text-align:center">
         <p><span style ="font-size:large; text-align:center; font:bold">Search for Cars By Amenities</span></p>
         <br />
+
     </div>
     
 

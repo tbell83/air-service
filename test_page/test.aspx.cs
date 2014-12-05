@@ -13,7 +13,7 @@ namespace test_page{
             gvCarriers.DataSource=AirService.GetAirCarriers("Philadelphia","PA","Las Vegas","NV");
             gvCarriers.DataBind();
 
-            string[] requirements = new string[] {"First Class"};
+            string[] requirements = new string[] {"Economy"};
             gvFindFlights.DataSource=AirService.FindFlights(requirements, "Philadelphia","PA","Las Vegas","NV");
             gvFindFlights.DataBind();
 
