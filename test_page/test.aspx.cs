@@ -45,13 +45,13 @@ namespace test_page{
             //int flightID2 = int.Parse(ddlReturningFlightID.SelectedValue);
             //string seatType2 = "First Class";
 
-            int custID = 2;
-            int flightID1 = 3;
-            string seatType1 = "Economy";
-            string flightDate1 = "11/22/2014";
+            int custID = 2; 
+            int flightID1 = 3; 
+            string seatType1 = "Economy"; 
+            string flightDate1 = "11/22/2014"; 
             int flightID2 = 5;
-            string seatType2 = "First Class";
-            string flightDate2 = "11/24/2014";
+            string seatType2 = "First Class"; 
+            string flightDate2 = "11/24/2014"; 
             AirService.Reserve(custID, flightID1, seatType1,flightDate1, flightID2, seatType2, flightDate2); 
         }     
     }
