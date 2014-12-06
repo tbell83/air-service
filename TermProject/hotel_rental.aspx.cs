@@ -85,36 +85,28 @@ namespace TermProject
             amenities.PoolsideBar = Int32.Parse(ddlPoolsideBar.SelectedValue);
             amenities.FreeBreakfast = Int32.Parse(ddlBreakfast.SelectedValue);
 
-            DataSet roomsByAmenities = hotelProxy.GetRoomsByAmenities(amenities, Convert.ToString(gvHotel.Rows[0].Cells[2]), Convert.ToString(gvHotel.Rows[0].Cells[3])); 
-            
-            
+            DataSet roomsByAmenities = hotelProxy.GetRoomsByAmenities(amenities, gvHotel.Rows[0].Cells[2].Text, gvHotel.Rows[0].Cells[3].Text);
 
-            ////for (int i = 0; i < roomsByHotel.Tables[0].Rows.Count; i++)
-            //for (int i = 0; i< gvRooms.Rows.Count; i++)
-            //{
-            //    string hotelName1 = Convert.ToString(gvRooms.Rows[i].Cells[0]);
-            //        //Convert.ToString(roomsByHotel.Tables[0].Rows[i][0]);
-            //    string hotelRoom1 = Convert.ToString(gvRooms.Rows[i].Cells[1]);
-            //        //Convert.ToInt32(roomsByHotel.Tables[0].Rows[i][1]);
+           
+            //iterates through gridview of rooms by hotel and compares it to dataset of rooms by amenities
+            for (int i = 0; i < gvRooms.Rows.Count; i++)
+            {
+                string roomID1 = gvRooms.Rows[i].Cells[2].Text;
+                bool foundmatch = false;
 
-            //    bool foundmatch = false; 
-
-            //    for (int j = 0; j < roomsByAmenities.Tables[0].Rows.Count; j++)
-            //    {
-            //        string hotelName2 = Convert.ToString(roomsByAmenities.Tables[0].Rows[j][0]);
-            //        string hotelRoom2 = Convert.ToString(roomsByAmenities.Tables[0].Rows[j][1]);
-
-            //        if (hotelName1 == hotelName2 && hotelRoom1 == hotelRoom2)
-            //        {
-            //            foundmatch = true; 
-            //        }
-            //    }
-
-            //    if (!foundmatch)
-            //    {
-            //        gvRooms.Rows[i].BackColor = Color.AliceBlue; 
-            //    }
-            //}    
+                for (int j = 0; j < roomsByAmenities.Tables[0].Rows.Count; j++)
+                {
+                    string roomID2 = roomsByAmenities.Tables[0].Rows[j].ItemArray.GetValue(2).ToString();
+                    if (roomID1 == roomID2)
+                    {
+                        foundmatch = true;
+                    }
+                }
+                if (!foundmatch) 
+                { //hide all rows that did not appear in both datasets
+                    gvRooms.Rows[i].Visible = false;
+                }
+            }    
         }
 
         protected void gvRooms_SelectedIndexChanged(object sender, EventArgs e)
