@@ -82,26 +82,156 @@
      </div>
      <br />
      <br />
-    <div class="row col-lg-8 col-md-12" style="text-align:center">
-        <p><span style ="font-size:large; text-align:center; font:bold">Car Rental Agencies</span></p>
-        <br />
-        <div class="btn-row">
-            <asp:GridView ID="gvAgencies" runat="server" CssClass="table" >
-                <Columns>
-                    <asp:CommandField AccessibleHeaderText="Cars By Agency" ButtonType="Button" HeaderText="Cars By Agency" SelectText="See All Cars" ShowSelectButton="True" />
-                </Columns>
-            </asp:GridView>
+    <asp:Panel ID="pnlCars" runat="server" visible="false">
+        <div class="row col-lg-8 col-md-12" style="text-align:center; padding-right:10px">
+            <p><span style ="font-size:large; text-align:center; font:bold">Car Rental Agencies</span></p>
             <br />
+            <div class="btn-row">
+                <asp:GridView ID="gvAgencies" runat="server" CssClass="table" OnSelectedIndexChanged="gvAgencies_SelectedIndexChanged" >
+                    <Columns>
+                        <asp:CommandField AccessibleHeaderText="Cars By Agency" ButtonType="Button" HeaderText="Cars By Agency" SelectText="See All Cars" ShowSelectButton="True" />
+                    </Columns>
+                </asp:GridView>
+                <br />
+            </div>
         </div>
-    </div>
 
-    <div class="row col-lg-3 col-lg-offset-1 col-md-12" style="text-align:center">
-        <p><span style ="font-size:large; text-align:center; font:bold">Search for Cars By Amenities</span></p>
-        <br />
-
-    </div>
-    
-
+        <div class="row col-lg-4 col-md-12" style="text-align:center">
+            <p><span style ="font-size:large; text-align:center; font:bold">Search for Cars By Amenities</span></p>
+            <br />
+            <div class="col-lg-6" style="padding-bottom:10px">
+                <p style="padding-bottom:3px">Make</p>
+                <asp:DropDownList ID="ddlMake" runat="server">
+                    <asp:ListItem Value="%">No Preference</asp:ListItem>
+                    <asp:ListItem Value="Honda">Honda</asp:ListItem>
+                    <asp:ListItem Value="Toyota">Toyota</asp:ListItem>
+                    <asp:ListItem Value="Ford">Ford</asp:ListItem>
+                    <asp:ListItem Value="Jeep">Jeep</asp:ListItem>
+                    <asp:ListItem Value="Fiat">Fiat</asp:ListItem>
+                    <asp:ListItem Value="Lincoln">Lincoln</asp:ListItem>
+                    <asp:ListItem Value="Voltswagon">Voltswagon</asp:ListItem>
+                </asp:DropDownList>
+             </div>
+            <div class="col-lg-6" style="padding-bottom:10px">
+                <p style="padding-bottom:3px">Model</p>
+                <asp:DropDownList ID="ddlModel" runat="server">
+                    <asp:ListItem Value="%">No Preference</asp:ListItem>
+                    <asp:ListItem Value="CRV">CRV</asp:ListItem>
+                    <asp:ListItem Value="Corola">Corola</asp:ListItem>
+                    <asp:ListItem Value="F-150">F-150</asp:ListItem>
+                    <asp:ListItem Value="Durango">Durango</asp:ListItem>
+                    <asp:ListItem Value="500">500</asp:ListItem>
+                    <asp:ListItem Value="Towncar">Towncar</asp:ListItem>
+                    <asp:ListItem Value="Camry">Camry</asp:ListItem>
+                    <asp:ListItem Value="Camry">Beetle</asp:ListItem>
+                </asp:DropDownList>
+            </div>
+        
+            <div class="col-lg-6" style="padding-bottom:10px">
+                <p style="padding-bottom:3px">Type</p>
+                <asp:DropDownList ID="ddlType" runat="server">
+                    <asp:ListItem Value="%">No Preference</asp:ListItem>
+                    <asp:ListItem Value="Car">Car</asp:ListItem>
+                    <asp:ListItem Value="Truck">Truck</asp:ListItem>
+                    <asp:ListItem Value="All-Terrain">All-Terrain</asp:ListItem> 
+                </asp:DropDownList>
+            </div>
+            <div class="col-lg-6" style="padding-bottom:10px">
+                <p style="padding-bottom:3px">Doors</p>
+                 <asp:DropDownList ID="ddlDoors" runat="server">
+                    <asp:ListItem Value="%">No Preference</asp:ListItem>
+                    <asp:ListItem Value="2">2</asp:ListItem>
+                    <asp:ListItem Value="4">4</asp:ListItem>
+                 </asp:DropDownList>
+            </div>     
+       
+            <div class="col-lg-6" style="padding-bottom:10px">
+                <p style="padding-bottom:3px">Transmission</p>
+                <asp:DropDownList ID="ddlTransmission" runat="server">
+                    <asp:ListItem Value="%">No Preference</asp:ListItem>
+                    <asp:ListItem Value="2">Automatic</asp:ListItem>
+                    <asp:ListItem Value="4">Manual</asp:ListItem>
+                </asp:DropDownList>  
+            </div>
+          
+            <div class="col-lg-6" style="padding-bottom:10px">
+                <p style="padding-bottom:3px">GPS</p>
+                <asp:DropDownList ID="ddlGPS" runat="server">
+                    <asp:ListItem Value="%">No Preference</asp:ListItem>
+                    <asp:ListItem Value="Yes">Yes</asp:ListItem>
+                    <asp:ListItem Value="No">No</asp:ListItem>
+                </asp:DropDownList> 
+            </div>
+        
+            <div class="col-lg-6" style="padding-bottom=10px">
+                <p style="padding-bottom:3px">Rearview Camera</p>
+                <asp:DropDownList ID="ddlRearviewCamera" runat="server">
+                    <asp:ListItem Value="%">No Preference</asp:ListItem>
+                    <asp:ListItem Value="Yes">Yes</asp:ListItem>
+                    <asp:ListItem Value="No">No</asp:ListItem>
+                </asp:DropDownList> 
+            </div>
+        
+            <div class="col-lg-6" style="padding-bottom:10px">
+                <p style="padding-bottom:3px">Sunroof</p>
+                <asp:DropDownList ID="ddlSunroof" runat="server">
+                    <asp:ListItem Value="%">No Preference</asp:ListItem>
+                    <asp:ListItem Value="Yes">Yes</asp:ListItem>
+                    <asp:ListItem Value="No">No</asp:ListItem>
+                </asp:DropDownList> 
+            </div>
+        
+            <div class="col-lg-6" style="padding-bottom:10px">
+                <p style="padding-bottom:3px">All-Wheel Drive</p>
+                <asp:DropDownList ID="ddlAWD" runat="server">
+                    <asp:ListItem Value="%">No Preference</asp:ListItem>
+                    <asp:ListItem Value="Yes">Yes</asp:ListItem>
+                    <asp:ListItem Value="No">No</asp:ListItem>
+                </asp:DropDownList>
+            </div> 
+        
+            <div class="col-lg-6" style="padding-bottom:10px">
+                <p style="padding-bottom:3px">Year</p> 
+                <asp:DropDownList ID="ddlYear" runat="server">
+                    <asp:ListItem Value="%">No Preference</asp:ListItem>
+                    <asp:ListItem Value="1999">1999</asp:ListItem>
+                    <asp:ListItem Value="2000">2000</asp:ListItem>
+                    <asp:ListItem Value="2001">2001</asp:ListItem>
+                    <asp:ListItem Value="2002">2002</asp:ListItem>
+                    <asp:ListItem Value="2003">2003</asp:ListItem>
+                    <asp:ListItem Value="2004">2004</asp:ListItem>
+                    <asp:ListItem Value="2005">2005</asp:ListItem>
+                    <asp:ListItem Value="2006">2006</asp:ListItem>
+                    <asp:ListItem Value="2007">2007</asp:ListItem>
+                    <asp:ListItem Value="2008">2008</asp:ListItem>
+                    <asp:ListItem Value="2009">2009</asp:ListItem>
+                    <asp:ListItem Value="2010">2010</asp:ListItem>
+                    <asp:ListItem Value="2011">2011</asp:ListItem>
+                    <asp:ListItem Value="2012">2012</asp:ListItem>
+                    <asp:ListItem Value="2013">2013</asp:ListItem>
+                    <asp:ListItem Value="2014">2014</asp:ListItem>
+                </asp:DropDownList>    
+            </div>
+            <div class="col-lg-12" style="padding-bottom:15px">
+                <p style="padding-bottom:3px">Color</p>   
+                  <asp:DropDownList ID="ddlColor" runat="server">
+                    <asp:ListItem Value="%">No Preference</asp:ListItem>
+                    <asp:ListItem Value="Black">Black</asp:ListItem>
+                    <asp:ListItem Value="Blue">Blue</asp:ListItem>   
+                    <asp:ListItem Value="Green">Green</asp:ListItem>
+                    <asp:ListItem Value="Orange">Orange</asp:ListItem>
+                    <asp:ListItem Value="Pink">Pink</asp:ListItem> 
+                    <asp:ListItem Value="Red">Red</asp:ListItem>
+                    <asp:ListItem Value="White">White</asp:ListItem>
+                    <asp:ListItem Value="Yellow">Yellow</asp:ListItem>
+                </asp:DropDownList> 
+            </div>
+            <div class="btn-row">
+                <asp:Button ID="btnSearchByAmenities" runat="server" Text="Search By Amenities" OnClick="btnSearchByAmenities_Click" />
+            </div>
+        </div>
+        <asp:GridView ID="gvCars" runat="server" CssClass="table" />
+    </asp:Panel>
   
      
  
