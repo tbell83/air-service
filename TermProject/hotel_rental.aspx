@@ -185,17 +185,13 @@
         </div>
         <br />
         <br />
-        <asp:GridView ID="gvRooms" runat="server" CssClass="table" AutoGenerateColumns="False" OnSelectedIndexChanged="gvRooms_SelectedIndexChanged" >
+        <asp:GridView ID="gvRooms" runat="server" CssClass="table" OnSelectedIndexChanged="gvRooms_SelectedIndexChanged" >
             <Columns>
-                <asp:TemplateField>
-                    <ItemTemplate>
-                        <asp:Button ID="btnAddToCart" runat="server" Text="Add to Cart" />
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:BoundField DataField="Name" HeaderText="Hotel" />
+                <%--<asp:BoundField DataField="Name" HeaderText="Hotel" />
                 <asp:BoundField DataField="RoomNum" HeaderText="Room Number" />
                 <asp:BoundField DataField="Price" DataFormatString="{0:c}" HeaderText="Price" />
-                <asp:BoundField DataField="Reserved" HeaderText="Reserved" />
+                <asp:BoundField DataField="Reserved" HeaderText="Reserved" />--%>
+                <asp:CommandField AccessibleHeaderText="Add to Cart" ButtonType="Button" SelectText="Add to Cart " ShowSelectButton="True" />
             </Columns>
         </asp:GridView>
         <br />
