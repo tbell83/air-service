@@ -13,7 +13,8 @@ namespace air_service{
     /// Summary description for AirService
     /// </summary>
     [WebService(Namespace = "http://tempuri.org/")]
-    [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
+    //[WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
+    [WebServiceBinding(ConformsTo = WsiProfiles.None)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     // [System.Web.Script.Services.ScriptService]
@@ -110,7 +111,7 @@ namespace air_service{
             return objDB.GetDataSetUsingCmdObj(objCommand);
         }
 
-        [WebMethod]
+        [WebMethod(MessageName="ReserveSingle")]
         public Boolean Reserve(int customerID, int flightID, string seatType, string dateTime){
             DateTime flightDate = Convert.ToDateTime(dateTime);
             bool success;
@@ -178,7 +179,7 @@ namespace air_service{
         }
 
 
-        [WebMethod]
+        [WebMethod(MessageName="Reserve")]
         public Boolean Reserve(int customerID, int flightID1, string seatType1, string dt1, int flightID2, string seatType2, string dt2)  //default params for flightID2, seatType2, dt2 make them optional
         {
             DateTime flightDate1 = Convert.ToDateTime(dt1);
