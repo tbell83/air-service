@@ -20,6 +20,9 @@ namespace test_page{
             gvGetFlights.DataSource = AirService.GetFlights(1, "Philadelphia", "PA", "Las Vegas", "NV");
             gvGetFlights.DataBind();
 
+            gvCities.DataSource = AirService.getCities();
+            gvCities.DataBind();
+
             //ddlCustomers.DataSource = AirService.GetTable("airService_Customers");
             //ddlCustomers.DataTextField = "customerID";
             //ddlCustomers.DataValueField = "customerID";

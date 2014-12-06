@@ -98,6 +98,48 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="getFlightsFrom">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="originAirportID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getFlightsFromResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getFlightsFromResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getFlightsTo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="destinationAirportID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getFlightsToResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getFlightsToResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="ReserveSingle">
         <s:complexType>
           <s:sequence>
@@ -182,6 +224,18 @@
   <wsdl:message name="getCitiesSoapOut">
     <wsdl:part name="parameters" element="tns:getCitiesResponse" />
   </wsdl:message>
+  <wsdl:message name="getFlightsFromSoapIn">
+    <wsdl:part name="parameters" element="tns:getFlightsFrom" />
+  </wsdl:message>
+  <wsdl:message name="getFlightsFromSoapOut">
+    <wsdl:part name="parameters" element="tns:getFlightsFromResponse" />
+  </wsdl:message>
+  <wsdl:message name="getFlightsToSoapIn">
+    <wsdl:part name="parameters" element="tns:getFlightsTo" />
+  </wsdl:message>
+  <wsdl:message name="getFlightsToSoapOut">
+    <wsdl:part name="parameters" element="tns:getFlightsToResponse" />
+  </wsdl:message>
   <wsdl:message name="ReserveSingleSoapIn">
     <wsdl:part name="parameters" element="tns:ReserveSingle" />
   </wsdl:message>
@@ -216,6 +270,14 @@
     <wsdl:operation name="getCities">
       <wsdl:input message="tns:getCitiesSoapIn" />
       <wsdl:output message="tns:getCitiesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getFlightsFrom">
+      <wsdl:input message="tns:getFlightsFromSoapIn" />
+      <wsdl:output message="tns:getFlightsFromSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getFlightsTo">
+      <wsdl:input message="tns:getFlightsToSoapIn" />
+      <wsdl:output message="tns:getFlightsToSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="Reserve">
       <wsdl:input name="ReserveSingle" message="tns:ReserveSingleSoapIn" />
@@ -261,6 +323,24 @@
     </wsdl:operation>
     <wsdl:operation name="getCities">
       <soap:operation soapAction="http://tempuri.org/getCities" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getFlightsFrom">
+      <soap:operation soapAction="http://tempuri.org/getFlightsFrom" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getFlightsTo">
+      <soap:operation soapAction="http://tempuri.org/getFlightsTo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -327,6 +407,24 @@
     </wsdl:operation>
     <wsdl:operation name="getCities">
       <soap12:operation soapAction="http://tempuri.org/getCities" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getFlightsFrom">
+      <soap12:operation soapAction="http://tempuri.org/getFlightsFrom" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getFlightsTo">
+      <soap12:operation soapAction="http://tempuri.org/getFlightsTo" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

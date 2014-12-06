@@ -32,6 +32,13 @@
 
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
+                <h1>GetCities</h1>
+                <asp:GridView ID="gvCities" runat="server" CssClass="table" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
                <%-- &nbsp;&nbsp;&nbsp;&nbsp; Customer:&nbsp;
                 <asp:DropDownList ID="ddlCustomers" runat="server">
                 </asp:DropDownList>

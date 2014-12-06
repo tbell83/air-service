@@ -111,6 +111,22 @@ namespace air_service{
             return objDB.GetDataSetUsingCmdObj(objCommand);
         }
 
+        [WebMethod]
+        public DataSet getFlightsFrom(int originAirportID){
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "GetFlightsFrom";
+            objCommand.Parameters.AddWithValue("@OriginAirportID", originAirportID);
+            return objDB.GetDataSetUsingCmdObj(objCommand);
+        }
+
+        [WebMethod]
+        public DataSet getFlightsTo(int destinationAirportID){
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "GetFlightsTo";
+            objCommand.Parameters.AddWithValue("@DestinationAirportID", destinationAirportID);
+            return objDB.GetDataSetUsingCmdObj(objCommand);
+        }
+
         [WebMethod(MessageName="ReserveSingle")]
         public Boolean Reserve(int customerID, int flightID, string seatType, string dateTime){
             DateTime flightDate = Convert.ToDateTime(dateTime);
