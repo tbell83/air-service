@@ -111,7 +111,75 @@ namespace air_service{
         }
 
         [WebMethod]
-        public Boolean Reserve(int customerID, int flightID1, string seatType1, string dt1, int flightID2 = 0, string seatType2= null, string dt2 = "01/01/2015")  //default params for flightID2, seatType2, dt2 make them optional
+        public Boolean Reserve(int customerID, int flightID, string seatType, string dateTime){
+            DateTime flightDate = Convert.ToDateTime(dateTime);
+            bool success;
+            if (CheckAvailability(flightID, flightDate, seatType)){
+                success = true;
+            } else {
+                return false;
+            }
+
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "CreateTrip";
+
+            SqlParameter inputParam_customerID = new SqlParameter("@customerID", customerID);
+            inputParam_customerID.Direction = ParameterDirection.Input;
+            inputParam_customerID.SqlDbType = SqlDbType.Int;
+            inputParam_customerID.Size = 4;
+            objCommand.Parameters.Add(inputParam_customerID); 
+
+            SqlParameter outputParam_tripID = new SqlParameter("@tripID", DbType.Int32);
+            outputParam_tripID.Direction = ParameterDirection.Output;
+            objCommand.Parameters.Add(outputParam_tripID);
+
+            try { objDB.DoUpdateUsingCmdObj(objCommand); }
+            catch (Exception e){ 
+                return false; 
+            }
+
+            int tripID = int.Parse(objCommand.Parameters["@tripID"].Value.ToString());
+
+            SqlCommand objCommand2 = new SqlCommand(); 
+            objCommand2.CommandType = CommandType.StoredProcedure;
+            objCommand2.CommandText = "CreateReservation";
+
+            SqlParameter inputParam_tripID = new SqlParameter("@tripID", tripID);
+            inputParam_tripID.Direction = ParameterDirection.Input;
+            inputParam_tripID.SqlDbType = SqlDbType.Int;
+            inputParam_tripID.Size = 4;
+
+            SqlParameter inputParam_flightID = new SqlParameter("@flightID", flightID);
+            inputParam_flightID.Direction = ParameterDirection.Input;
+            inputParam_flightID.SqlDbType = SqlDbType.Int;
+            inputParam_flightID.Size = 4; //4 bytes
+
+            SqlParameter inputParam_seatType = new SqlParameter("@seatType", seatType);
+            inputParam_seatType.Direction = ParameterDirection.Input;
+            inputParam_seatType.SqlDbType = SqlDbType.VarChar;
+            inputParam_seatType.Size = 50;
+
+            SqlParameter inputParam_flightDate = new SqlParameter("@flightDate", flightDate);
+            inputParam_flightDate.Direction = ParameterDirection.Input;
+            inputParam_flightDate.SqlDbType = SqlDbType.DateTime; 
+            inputParam_flightDate.Size = 50;
+
+            objCommand2.Parameters.Add(inputParam_tripID);
+            objCommand2.Parameters.Add(inputParam_flightID);
+            objCommand2.Parameters.Add(inputParam_seatType);
+            objCommand2.Parameters.Add(inputParam_flightDate);
+
+            try { objDB.DoUpdateUsingCmdObj(objCommand2); }
+            catch (Exception e){
+                return false;
+            }
+
+            return success;
+        }
+
+
+        [WebMethod]
+        public Boolean Reserve(int customerID, int flightID1, string seatType1, string dt1, int flightID2, string seatType2, string dt2)  //default params for flightID2, seatType2, dt2 make them optional
         {
             DateTime flightDate1 = Convert.ToDateTime(dt1);
             DateTime flightDate2 = Convert.ToDateTime(dt2);
@@ -125,7 +193,6 @@ namespace air_service{
                 success = false;
                 return success;
             }
-
        
             //create trip for customer with tripID as output parameter
             objCommand.CommandType = CommandType.StoredProcedure;
