@@ -102,6 +102,14 @@ namespace air_service{
             return flights;
         }
 
+        //This function returns a dataset containing state, city, and airport information.
+        [WebMethod]
+        public DataSet getCities(){
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "GetCities";
+            return objDB.GetDataSetUsingCmdObj(objCommand);
+        }
+
         [WebMethod]
         public Boolean Reserve(int customerID, int flightID, string seatType, string dateTime){
             DateTime flightDate = Convert.ToDateTime(dateTime);
@@ -168,7 +176,6 @@ namespace air_service{
 
             return success;
         }
-
 
 
         [WebMethod]
