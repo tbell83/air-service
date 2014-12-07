@@ -49,6 +49,15 @@ namespace test_page {
         protected global::System.Web.UI.WebControls.GridView gvGetFlights;
         
         /// <summary>
+        /// gvCities control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvCities;
+        
+        /// <summary>
         /// btnReserve control.
         /// </summary>
         /// <remarks>

@@ -57,6 +57,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="book_flight.aspx" />
     <Content Include="css\bootstrap-theme.css" />
     <Content Include="css\bootstrap-theme.min.css" />
     <Content Include="css\bootstrap.css" />
@@ -73,7 +74,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </Content>
-    <Content Include="Web References\AirService\AirService.disco" />
+    <None Include="Web References\AirService\AirService.disco" />
     <Content Include="Web References\CarService\CarWebService.disco" />
     <Content Include="Web References\HotelService\HotelService.disco" />
     <Content Include="Web.config" />
@@ -82,6 +83,13 @@
     <Content Include="hotel_rental.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="book_flight.aspx.cs">
+      <DependentUpon>book_flight.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="book_flight.aspx.designer.cs">
+      <DependentUpon>book_flight.aspx</DependentUpon>
+    </Compile>
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -162,11 +170,11 @@
     <Content Include="css\bootstrap.css.map" />
     <Content Include="master.Master" />
     <None Include="Properties\PublishProfiles\kl.pubxml" />
-    <Content Include="Web References\AirService\AirService.wsdl" />
-    <Content Include="Web References\AirService\Reference.map">
+    <None Include="Web References\AirService\AirService.wsdl" />
+    <None Include="Web References\AirService\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
+    </None>
     <Content Include="Web References\HotelService\HotelService.wsdl" />
     <Content Include="Web References\HotelService\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>

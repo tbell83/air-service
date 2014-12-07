@@ -70,7 +70,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </Content>
-    <Content Include="Web References\AirService\AirService.disco" />
+    <None Include="Web References\AirService\AirService.disco" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -99,11 +99,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="css\bootstrap-theme.css.map" />
     <Content Include="css\bootstrap.css.map" />
-    <Content Include="Web References\AirService\AirService.wsdl" />
-    <Content Include="Web References\AirService\Reference.map">
+    <None Include="Web References\AirService\AirService.wsdl" />
+    <None Include="Web References\AirService\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
+    </None>
     <None Include="Properties\PublishProfiles\jksd.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
