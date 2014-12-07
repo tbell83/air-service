@@ -17,7 +17,11 @@ namespace TermProject
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["user"] == null)
+            {
+                Response.AddHeader("REFRESH", "50;URL=login.aspx");
+                Response.Redirect("login.aspx");
+            }
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)

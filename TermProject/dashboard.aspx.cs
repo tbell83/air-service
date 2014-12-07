@@ -48,5 +48,11 @@ namespace TermProject
         {
             Response.Redirect("shopping_cart.aspx");
         }
+
+        protected void btnLogOut_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            Response.Redirect("login.aspx");
+        }
     }
 }

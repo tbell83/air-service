@@ -9,6 +9,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Security.Cryptography;
 using System.Net;
+using ECommerceLibrary;
 
 namespace TermProject{
     public partial class registration : System.Web.UI.Page{

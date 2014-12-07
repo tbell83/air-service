@@ -24,17 +24,25 @@ namespace TermProject{
                 }else{
                     DeleteCookie();
                 }
-                
+
 
                 Serialize s = new Serialize();
-                VacationPackage cart; 
-                string user = (string)Session["user"];
-                //if (s.ReadCartFromDB(user) != null) //if user has cart in db
-                //{
-                //    cart = (VacationPackage)s.ReadCartFromDB(user); //retrieve cart
-                //}
-                //else //if user has no recorded cart 
+                VacationPackage cart;
+                string user = Session["user"].ToString();
+                if (s.CheckCartExists(user))
                 {
+                    if (s.ReadCartFromDB(user) != null) //if user has cart in db
+                    {
+                        cart = (VacationPackage)s.ReadCartFromDB(user); //retrieve cart
+                    }
+                    else //cart exists but is null for some reason
+                    {
+                        cart = new VacationPackage();
+                    }
+                }
+                else //if user has no recorded cart 
+                {
+                    s.CreateNewCart(user);
                     cart = new VacationPackage(); //get a new cart set up for them
                 }
                 Session["cart"] = cart; 
