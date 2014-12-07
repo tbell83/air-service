@@ -48,6 +48,8 @@ namespace TermProject.AirService {
         
         private System.Threading.SendOrPostCallback GetTableOperationCompleted;
         
+        private System.Threading.SendOrPostCallback CheckAvailableOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -112,6 +114,9 @@ namespace TermProject.AirService {
         
         /// <remarks/>
         public event GetTableCompletedEventHandler GetTableCompleted;
+        
+        /// <remarks/>
+        public event CheckAvailableCompletedEventHandler CheckAvailableCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetAirCarriers", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -416,6 +421,39 @@ namespace TermProject.AirService {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/CheckAvailable", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int CheckAvailable(int flightID, System.DateTime flightDate, string seatClass) {
+            object[] results = this.Invoke("CheckAvailable", new object[] {
+                        flightID,
+                        flightDate,
+                        seatClass});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void CheckAvailableAsync(int flightID, System.DateTime flightDate, string seatClass) {
+            this.CheckAvailableAsync(flightID, flightDate, seatClass, null);
+        }
+        
+        /// <remarks/>
+        public void CheckAvailableAsync(int flightID, System.DateTime flightDate, string seatClass, object userState) {
+            if ((this.CheckAvailableOperationCompleted == null)) {
+                this.CheckAvailableOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCheckAvailableOperationCompleted);
+            }
+            this.InvokeAsync("CheckAvailable", new object[] {
+                        flightID,
+                        flightDate,
+                        seatClass}, this.CheckAvailableOperationCompleted, userState);
+        }
+        
+        private void OnCheckAvailableOperationCompleted(object arg) {
+            if ((this.CheckAvailableCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.CheckAvailableCompleted(this, new CheckAvailableCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -664,6 +702,32 @@ namespace TermProject.AirService {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((System.Data.DataSet)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    public delegate void CheckAvailableCompletedEventHandler(object sender, CheckAvailableCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class CheckAvailableCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal CheckAvailableCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
             }
         }
     }

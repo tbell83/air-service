@@ -28,6 +28,15 @@ namespace TermProject{
 
             States = States.Distinct().ToList();
 
+            if(chkFlightType.Checked){
+                incomingDate.Visible = true;
+            }else{
+                incomingDate.Visible = false;
+            }
+
+            lblSeatType2.Text = ddlSeatType.SelectedItem.ToString();
+            lblCarrierID.Text = ddlCarriers.SelectedValue.ToString();
+
             if(!IsPostBack){
                 ddlState.Items.Clear();
                 ddlState.Items.Add(new ListItem("--Select a State--",""));
@@ -90,6 +99,9 @@ namespace TermProject{
             ddlAirport.DataTextField = "Name";
             ddlAirport.DataValueField = "ID";
             ddlAirport.DataBind();
+
+            lblOutgoingDate.Text = calOutgoingDate.SelectedDate.ToShortDateString();
+            lblIncomingDate.Text = calIncomingDate.SelectedDate.ToShortDateString();
         }
 
         protected void ddlArrivalState_SelectedIndexChanged(object sender, EventArgs e){
@@ -152,13 +164,54 @@ namespace TermProject{
         protected void btnShowFlights_Click(object sender, EventArgs e){
             string requirements = ddlSeatType.SelectedItem.ToString();
             string[] requirementsIsSilly = new string[]{requirements};
-            gvAvailableFlights.DataSource = airService.FindFlights(requirementsIsSilly, ddlCity.SelectedItem.ToString(),ddlState.SelectedItem.ToString(),ddlArrivalCity.SelectedItem.ToString(),ddlArrivalState.SelectedItem.ToString());
+            DataSet dsOutgoingFlights = new DataSet();
+            dsOutgoingFlights = airService.FindFlights(requirementsIsSilly, ddlCity.SelectedItem.ToString(),ddlState.SelectedItem.ToString(),ddlArrivalCity.SelectedItem.ToString(),ddlArrivalState.SelectedItem.ToString());
+            dsOutgoingFlights.Tables[0].Columns.Add("SeatsAvailable", typeof(int));
+
+            foreach(DataRow row in dsOutgoingFlights.Tables[0].Rows){
+                int flight = int.Parse(row[0].ToString());
+                DateTime date = calOutgoingDate.SelectedDate;
+                string seatType = ddlSeatType.SelectedItem.ToString();
+                int available = airService.CheckAvailable(flight, date, seatType);
+                row[7] = available;
+                if(row[1].ToString() != ddlCarriers.SelectedItem.ToString()){
+                    row.Delete();
+                }
+            }
+
+            dsOutgoingFlights.AcceptChanges();
+
+            gvAvailableFlights.DataSource = dsOutgoingFlights;
             gvAvailableFlights.DataBind();
 
             if(chkFlightType.Checked){
+                DataSet dsIncomingFlights = new DataSet();
+                dsIncomingFlights = airService.FindFlights(requirementsIsSilly,ddlArrivalCity.SelectedItem.ToString(),ddlArrivalState.SelectedItem.ToString(),ddlCity.SelectedItem.ToString(),ddlState.SelectedItem.ToString());
+                dsIncomingFlights.Tables[0].Columns.Add("SeatsAvailable", typeof(int));
+
+                foreach(DataRow row in dsIncomingFlights.Tables[0].Rows){
+                    int flight = int.Parse(row[0].ToString());
+                    DateTime date = calIncomingDate.SelectedDate;
+                    string seatType = ddlSeatType.SelectedItem.ToString();
+                    int available = airService.CheckAvailable(flight, date, seatType);
+                    row[7] = available;
+                    if(row[1].ToString() != ddlCarriers.SelectedItem.ToString()){
+                        row.Delete();
+                    }
+                }
+                dsIncomingFlights.AcceptChanges();
                 returning.Visible = true;
-                gvAvailableFlightsReturning.DataSource = airService.FindFlights(requirementsIsSilly,ddlArrivalCity.SelectedItem.ToString(),ddlArrivalState.SelectedItem.ToString(),ddlCity.SelectedItem.ToString(),ddlState.SelectedItem.ToString());
+                gvAvailableFlightsReturning.DataSource = dsIncomingFlights;
                 gvAvailableFlightsReturning.DataBind();
+            }
+        }
+
+        protected void btnAddToCart_Click(object sender, EventArgs e){
+            foreach(GridViewRow row in gvAvailableFlights.Rows){
+                RadioButton radioButton = (RadioButton)row.FindControl("rbOutgoingFlightSelection");
+                if(radioButton.Checked){
+                    int outgoingFlightID = int.Parse(row.Cells[0].Text);
+                }
             }
         }
 

@@ -13,6 +13,51 @@ namespace TermProject {
     public partial class book_flight {
         
         /// <summary>
+        /// chkFlightType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkFlightType;
+        
+        /// <summary>
+        /// outgoingDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl outgoingDate;
+        
+        /// <summary>
+        /// calOutgoingDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Calendar calOutgoingDate;
+        
+        /// <summary>
+        /// incomingDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl incomingDate;
+        
+        /// <summary>
+        /// calIncomingDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Calendar calIncomingDate;
+        
+        /// <summary>
         /// lblState control.
         /// </summary>
         /// <remarks>
@@ -139,6 +184,42 @@ namespace TermProject {
         protected global::System.Web.UI.WebControls.Label lblTo;
         
         /// <summary>
+        /// lblOutgoingDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblOutgoingDate;
+        
+        /// <summary>
+        /// lblIncomingDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblIncomingDate;
+        
+        /// <summary>
+        /// lblCarrierID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCarrierID;
+        
+        /// <summary>
+        /// lblSeatType2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSeatType2;
+        
+        /// <summary>
         /// btnFindCarriers control.
         /// </summary>
         /// <remarks>
@@ -184,15 +265,6 @@ namespace TermProject {
         protected global::System.Web.UI.WebControls.DropDownList ddlSeatType;
         
         /// <summary>
-        /// chkFlightType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkFlightType;
-        
-        /// <summary>
         /// btnShowFlights control.
         /// </summary>
         /// <remarks>
@@ -236,5 +308,14 @@ namespace TermProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvAvailableFlightsReturning;
+        
+        /// <summary>
+        /// btnAddToCart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddToCart;
     }
 }

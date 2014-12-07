@@ -33,6 +33,7 @@ namespace air_service{
             objCommand.Parameters.AddWithValue("@destinationCity", destinationCityName);
             objCommand.Parameters.AddWithValue("@destinationState", destinationState);
             DataSet carriers = objDB.GetDataSetUsingCmdObj(objCommand);
+            objDB.CloseConnection();
             return carriers;
         }
 
@@ -77,6 +78,7 @@ namespace air_service{
             objCommand.Parameters.Add(inputParam_arrivalState);
 
             DataSet flights = objDB.GetDataSetUsingCmdObj(objCommand);
+            objDB.CloseConnection();
             return flights;
         }
 
@@ -91,6 +93,7 @@ namespace air_service{
             objCommand.Parameters.AddWithValue("@destinationCity", destinationCityName);
             objCommand.Parameters.AddWithValue("@destinationState", destinationState);
             DataSet flights = objDB.GetDataSetUsingCmdObj(objCommand);
+            objDB.CloseConnection();
             foreach (string item in requirements){
                 if (item == "First Class"){
                     flights.Tables[0].Columns.RemoveAt(7);
@@ -108,7 +111,9 @@ namespace air_service{
         public DataSet getCities(){
             objCommand.CommandType = CommandType.StoredProcedure;
             objCommand.CommandText = "GetCities";
-            return objDB.GetDataSetUsingCmdObj(objCommand);
+            DataSet cities = objDB.GetDataSetUsingCmdObj(objCommand);
+            objDB.CloseConnection();
+            return cities;
         }
 
         [WebMethod]
@@ -116,7 +121,9 @@ namespace air_service{
             objCommand.CommandType = CommandType.StoredProcedure;
             objCommand.CommandText = "GetFlightsFrom";
             objCommand.Parameters.AddWithValue("@OriginAirportID", originAirportID);
-            return objDB.GetDataSetUsingCmdObj(objCommand);
+            DataSet flightsFrom = objDB.GetDataSetUsingCmdObj(objCommand);
+            objDB.CloseConnection();
+            return flightsFrom;
         }
 
         [WebMethod]
@@ -124,7 +131,9 @@ namespace air_service{
             objCommand.CommandType = CommandType.StoredProcedure;
             objCommand.CommandText = "GetFlightsTo";
             objCommand.Parameters.AddWithValue("@DestinationAirportID", destinationAirportID);
-            return objDB.GetDataSetUsingCmdObj(objCommand);
+            DataSet flightsTo = objDB.GetDataSetUsingCmdObj(objCommand);
+            objDB.CloseConnection();
+            return flightsTo;
         }
 
         [WebMethod(MessageName="ReserveSingle")]
@@ -150,8 +159,12 @@ namespace air_service{
             outputParam_tripID.Direction = ParameterDirection.Output;
             objCommand.Parameters.Add(outputParam_tripID);
 
-            try { objDB.DoUpdateUsingCmdObj(objCommand); }
-            catch (Exception e){ 
+            try {
+                objDB.DoUpdateUsingCmdObj(objCommand);
+                objDB.CloseConnection();
+            }
+            catch (Exception e){
+                objDB.CloseConnection();
                 return false; 
             }
 
@@ -186,8 +199,12 @@ namespace air_service{
             objCommand2.Parameters.Add(inputParam_seatType);
             objCommand2.Parameters.Add(inputParam_flightDate);
 
-            try { objDB.DoUpdateUsingCmdObj(objCommand2); }
+            try {
+                objDB.DoUpdateUsingCmdObj(objCommand2);
+                objDB.CloseConnection();
+            }
             catch (Exception e){
+                objDB.CloseConnection();
                 return false;
             }
 
@@ -226,9 +243,13 @@ namespace air_service{
             objCommand.Parameters.Add(outputParam_tripID);
 
             //execute stored procedure
-            try { objDB.DoUpdateUsingCmdObj(objCommand); }
+            try {
+                objDB.DoUpdateUsingCmdObj(objCommand);
+                objDB.CloseConnection();
+            }
             catch (Exception e) 
-            { 
+            {
+                objDB.CloseConnection();
                 success = false;
                 return success; 
             }
@@ -267,9 +288,13 @@ namespace air_service{
             objCommand2.Parameters.Add(inputParam_flightDate1);
 
             //execute stored procedure
-            try { objDB.DoUpdateUsingCmdObj(objCommand2); }
+            try {
+                objDB.DoUpdateUsingCmdObj(objCommand2);
+                objDB.CloseConnection();
+            }
             catch (Exception e)
             {
+                objDB.CloseConnection();
                 success = false;
                 return success;
             }
@@ -307,9 +332,13 @@ namespace air_service{
                 objCommand3.Parameters.Add(inputParam_flightDate2);
 
                 //execute stored procedure
-                try { objDB.DoUpdateUsingCmdObj(objCommand3); }
+                try {
+                    objDB.DoUpdateUsingCmdObj(objCommand3);
+                    objDB.CloseConnection();
+                }
                 catch (Exception e)
                 {
+                    objDB.CloseConnection();
                     success = false;
                     return success;
                 }            
@@ -321,7 +350,30 @@ namespace air_service{
         public DataSet GetTable(string tableName)
         {
             strSQL = "SELECT * FROM " + tableName; 
-            return objDB.GetDataSet(strSQL);
+            DataSet results = objDB.GetDataSet(strSQL);
+            objDB.CloseConnection();
+            return results;
+        }
+
+        [WebMethod]
+        public int CheckAvailable(int flightID, DateTime flightDate, string seatClass){
+            bool output = false;
+            SqlCommand objCommandCheck = new SqlCommand(); 
+            objCommandCheck.CommandType = CommandType.StoredProcedure;
+
+            if(seatClass == "Economy"){
+                objCommandCheck.CommandText = "CheckEconomyAvailability";
+            }else if(seatClass == "First Class"){
+                objCommandCheck.CommandText = "CheckFirstClassAvailability";
+            }
+
+            objCommandCheck.Parameters.AddWithValue("@flightID", flightID);
+            objCommandCheck.Parameters.AddWithValue("@flightDate", flightDate);
+            DataSet availability = objDB.GetDataSetUsingCmdObj(objCommandCheck);
+            objDB.CloseConnection();
+            int available = int.Parse(availability.Tables[0].Rows[0][0].ToString());
+
+            return available;
         }
 
         private bool CheckAvailability(int flightID, DateTime flightDate, string seatClass){
@@ -338,6 +390,7 @@ namespace air_service{
             objCommandCheck.Parameters.AddWithValue("@flightID", flightID);
             objCommandCheck.Parameters.AddWithValue("@flightDate", flightDate);
             DataSet availability = objDB.GetDataSetUsingCmdObj(objCommandCheck);
+            objDB.CloseConnection();
             int available = int.Parse(availability.Tables[0].Rows[0][0].ToString());
 
             if (available > 0){
