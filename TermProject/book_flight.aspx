@@ -34,10 +34,26 @@
             <asp:Button ID="btnShowFlights" Text="Show Flights" runat="server" OnClick="btnShowFlights_Click" CssClass="btn-default btn"/>
             <h1>Available Flights:</h1>
             <div class="row" runat="server" id="outgoing">
-                <asp:GridView ID="gvAvailableFlights" runat="server" CssClass="table" />
+                <asp:GridView ID="gvAvailableFlights" runat="server" CssClass="table" >
+                    <Columns>
+                        <asp:TemplateField>
+                            <ItemTemplate>
+                                <input name="rbOutgoingFlightSelection" type="radio" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                </asp:GridView>
             </div>
             <div class="row" runat="server" id="returning" visible="false">
-                <asp:GridView ID="gvAvailableFlightsReturning" runat="server" CssClass="table"/>
+                <asp:GridView ID="gvAvailableFlightsReturning" runat="server" CssClass="table" >
+                    <Columns>
+                        <asp:TemplateField>
+                            <ItemTemplate>
+                                <input name="rbOutgoingFlightSelection" type="radio" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                </asp:GridView>
             </div>
         </div>
     </div>
