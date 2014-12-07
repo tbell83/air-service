@@ -216,21 +216,31 @@
                 <p style="padding-bottom:3px">Color</p>   
                   <asp:DropDownList ID="ddlColor" runat="server">
                     <asp:ListItem Value="%">No Preference</asp:ListItem>
-                    <asp:ListItem Value="Black">Black</asp:ListItem>
                     <asp:ListItem Value="Blue">Blue</asp:ListItem>   
-                    <asp:ListItem Value="Green">Green</asp:ListItem>
-                    <asp:ListItem Value="Orange">Orange</asp:ListItem>
-                    <asp:ListItem Value="Pink">Pink</asp:ListItem> 
                     <asp:ListItem Value="Red">Red</asp:ListItem>
                     <asp:ListItem Value="White">White</asp:ListItem>
-                    <asp:ListItem Value="Yellow">Yellow</asp:ListItem>
+                    
                 </asp:DropDownList> 
             </div>
             <div class="btn-row">
                 <asp:Button ID="btnSearchByAmenities" runat="server" Text="Search By Amenities" OnClick="btnSearchByAmenities_Click" />
             </div>
         </div>
-        <asp:GridView ID="gvCars" runat="server" CssClass="table" />
+
+        <asp:Panel ID="pnlCarResults" runat="server" Visible="false" style="padding:15px">
+            <div class="btn-row col-lg-12 col-md-12" style="font-size:x-large">Cars</div>
+            <div class="btn-row col-lg-12 col-md-12 col-sm-12" style="font-size:large">To add a rental car to your vacation package, click the "Add to Cart" button in the row for that car. </div>
+            <asp:GridView ID="gvCars" runat="server" CssClass="table" OnSelectedIndexChanged="gvCars_SelectedIndexChanged" >
+                <Columns>
+                    <asp:CommandField ButtonType="Button" SelectText="Add to Cart" ShowSelectButton="True" />
+                </Columns>
+            </asp:GridView>
+            <br />
+            <div class="btn-row col-lg-12 col-md-12" style ="padding: 15px">
+              <asp:Label ID="lblErrorCars" runat="server" style="font-size:x-large" />
+          </div>
+        </asp:Panel>
+        
     </asp:Panel>
   
      

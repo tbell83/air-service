@@ -62,6 +62,7 @@ namespace TermProject
             btnNewSearch.Visible = false;
             btnSearch.Visible = true;
             pnlHotels.Visible = false;
+            pnlRooms.Visible = false;
             lblErrorMsg.Text = " ";
             txtCity.Text = "";
             ddlStates.SelectedIndex = 0;
@@ -69,6 +70,8 @@ namespace TermProject
 
         protected void btnSearchRooms_Click(object sender, EventArgs e)
         {
+            pnlRooms.Visible = true;
+            lblErrorRooms.Text = ""; 
             HotelService.Hotel hotel = new HotelService.Hotel();
             hotel.Id = Int32.Parse(ddlHotel.SelectedValue);
             DataSet roomsByHotel = hotelProxy.GetRooms(hotel);
@@ -106,12 +109,29 @@ namespace TermProject
                 { //hide all rows that did not appear in both datasets
                     gvRooms.Rows[i].Visible = false;
                 }
-            }    
+            }
+            //gvRooms.Columns[2].Visible = false;
+            
         }
 
         protected void gvRooms_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Boolean reserved = Convert.ToBoolean(gvRooms.SelectedRow.Cells[5].Text);
+            string hotel = gvRooms.SelectedRow.Cells[1].Text;
+            string roomID = gvRooms.SelectedRow.Cells[2].Text;
+            string roomNum = gvRooms.SelectedRow.Cells[3].Text; 
+            
 
+            if (reserved)
+            {
+                lblErrorRooms.Text = "Sorry, that room is already reserved.";
+            }
+
+            else
+            {
+                //create hotelRes obj with roomID, add to vacationpackage in session
+                lblErrorRooms.Text = "Room " + roomNum + " at " + hotel + " has been added to your cart"; 
+            }
         }
 
     }
