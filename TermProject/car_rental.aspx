@@ -163,7 +163,7 @@
                 </asp:DropDownList> 
             </div>
         
-            <div class="col-lg-6" style="padding-bottom=10px">
+            <div class="col-lg-6" style="padding-bottom:10px">
                 <p style="padding-bottom:3px">Rearview Camera</p>
                 <asp:DropDownList ID="ddlRearviewCamera" runat="server">
                     <asp:ListItem Value="%">No Preference</asp:ListItem>
@@ -230,9 +230,21 @@
         <asp:Panel ID="pnlCarResults" runat="server" Visible="false" style="padding:15px">
             <div class="btn-row col-lg-12 col-md-12" style="font-size:x-large">Cars</div>
             <div class="btn-row col-lg-12 col-md-12 col-sm-12" style="font-size:large">To add a rental car to your vacation package, click the "Add to Cart" button in the row for that car. </div>
-            <asp:GridView ID="gvCars" runat="server" CssClass="table" OnSelectedIndexChanged="gvCars_SelectedIndexChanged" >
+            <asp:GridView ID="gvCars" runat="server" CssClass="table" OnSelectedIndexChanged="gvCars_SelectedIndexChanged" AutoGenerateColumns="False" >
                 <Columns>
                     <asp:CommandField ButtonType="Button" SelectText="Add to Cart" ShowSelectButton="True" />
+                    <asp:BoundField DataField="Car ID" HeaderText="Car ID" />
+                    <asp:BoundField DataField="Year" HeaderText="Year" />
+                    <asp:BoundField DataField="Make" HeaderText="Make" />
+                    <asp:BoundField DataField="Model" HeaderText="Model" />
+                    <asp:BoundField DataField="Type" HeaderText="Type" />
+                    <asp:BoundField DataField="Doors" HeaderText="Doors" />
+                    <asp:BoundField DataField="Transmission" HeaderText="Transmission" />
+                    <asp:BoundField DataField="GPS" HeaderText="GPS" />
+                    <asp:BoundField DataField="Rearview Camera" HeaderText="Rearview Camera" />
+                    <asp:BoundField DataField="Color" HeaderText="Color" />
+                    <asp:BoundField DataField="AWD" HeaderText="AWD" />
+                    <asp:BoundField DataField="Daily Rate" DataFormatString="{0:c}" HeaderText="Price" />
                 </Columns>
             </asp:GridView>
             <br />

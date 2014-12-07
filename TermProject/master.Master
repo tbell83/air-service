@@ -25,12 +25,12 @@
                       <div class="container-fluid">
                         <div>
                           <ul class="nav navbar-nav">
-                            <li><a href="#">Dashboard</a></li>
-                            <li><a href="#">Flights</a></li>
-                            <li><a href="#">Cars</a></li>
-                            <li><a href="#">Hotels</a></li>
+                            <li><a href="dashboard.aspx">Dashboard</a></li>
+                            <li><a href="book_flight.aspx">Flights</a></li>
+                            <li><a href="car_rental.aspx">Cars</a></li>
+                            <li><a href="hotel_rental.aspx">Hotels</a></li>
                             <li><a href="#">Events</a></li>
-                            <li><a href="#">Shopping Cart</a></li>
+                            <li><a href="shopping_cart.aspx">Shopping Cart</a></li>
                           </ul>
                         </div>
                       </div>

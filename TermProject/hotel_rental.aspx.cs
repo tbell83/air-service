@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Collections;
 using System.Drawing;
+using ECommerceLibrary;
 
 namespace TermProject
 {
@@ -120,6 +121,7 @@ namespace TermProject
             string hotel = gvRooms.SelectedRow.Cells[1].Text;
             string roomID = gvRooms.SelectedRow.Cells[2].Text;
             string roomNum = gvRooms.SelectedRow.Cells[3].Text; 
+            //string price = gvRooms.SelectedRow.Cells[4].Text;
             
 
             if (reserved)
@@ -129,7 +131,20 @@ namespace TermProject
 
             else
             {
-                //create hotelRes obj with roomID, add to vacationpackage in session
+                HotelService.Room room = new HotelService.Room();
+                room.RoomID = Int16.Parse(roomID);
+                room.RoomNumber = Int16.Parse(roomNum);
+                //room.Price = Int16.Parse(price); 
+                //find way to pass hotel and price into room obj
+
+
+                if (Session["cart"] != null)
+                {
+                    VacationPackage cart = (VacationPackage)Session["cart"];
+                    cart.HotelReservations.Add(room);
+                    Session["cart"] = cart;
+                }
+
                 lblErrorRooms.Text = "Room " + roomNum + " at " + hotel + " has been added to your cart"; 
             }
         }

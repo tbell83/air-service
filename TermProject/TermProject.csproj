@@ -64,6 +64,7 @@
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\master.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\npm.js" />
@@ -74,6 +75,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </Content>
+    <Content Include="shopping_cart.aspx" />
     <None Include="Web References\AirService\AirService.disco" />
     <Content Include="Web References\CarService\CarWebService.disco" />
     <Content Include="Web References\HotelService\HotelService.disco" />
@@ -89,6 +91,9 @@
     </Compile>
     <Compile Include="book_flight.aspx.designer.cs">
       <DependentUpon>book_flight.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
@@ -161,6 +166,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="shopping_cart.aspx.cs">
+      <DependentUpon>shopping_cart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="shopping_cart.aspx.designer.cs">
+      <DependentUpon>shopping_cart.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
@@ -193,6 +205,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ECommerceLibrary\ECommerceLibrary.csproj">
+      <Project>{20ca7e1d-0b55-4655-9d27-d568ea4437fc}</Project>
+      <Name>ECommerceLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Tools\Tools.csproj">
       <Project>{661aea78-b1a0-4a02-998c-563d493456b4}</Project>
       <Name>Tools</Name>

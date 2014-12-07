@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Net;
+using ECommerceLibrary;
 
 namespace TermProject{
     public partial class login : System.Web.UI.Page{
@@ -23,6 +24,21 @@ namespace TermProject{
                 }else{
                     DeleteCookie();
                 }
+                
+
+                Serialize s = new Serialize();
+                VacationPackage cart; 
+                string user = (string)Session["user"];
+                //if (s.ReadCartFromDB(user) != null) //if user has cart in db
+                //{
+                //    cart = (VacationPackage)s.ReadCartFromDB(user); //retrieve cart
+                //}
+                //else //if user has no recorded cart 
+                {
+                    cart = new VacationPackage(); //get a new cart set up for them
+                }
+                Session["cart"] = cart; 
+
                 Response.Redirect("dashboard.aspx");
             }
         }

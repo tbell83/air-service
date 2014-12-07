@@ -43,5 +43,10 @@ namespace TermProject
         {
             Response.Redirect("car_rental.aspx");
         }
+
+        protected void btnShoppingCart_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("shopping_cart.aspx");
+        }
     }
 }
