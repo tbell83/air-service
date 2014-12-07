@@ -11,6 +11,7 @@ namespace TermProject
 {
     public class Global : System.Web.HttpApplication
     {
+        Serialize s = new Serialize();
 
         protected void Application_Start(object sender, EventArgs e)
         {
@@ -39,12 +40,18 @@ namespace TermProject
 
         protected void Session_End(object sender, EventArgs e)
         {
-            //serialize vacationpackage object and add to database
+            if (Session["cart"] != null)
+            {
+                object cart = Session["cart"];
+                string user = Session["user"].ToString();
+
+                s.WriteCartToDB(cart, user);
+            }
         }
 
         protected void Application_End(object sender, EventArgs e)
         {
-
+            
         }
     }
 }

@@ -13,6 +13,14 @@ namespace TermProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            if (Session["user"] == null)
+            {
+                Response.AddHeader("REFRESH", "50;URL=login.aspx");
+                Response.Redirect("login.aspx");
+            }
+
+
             VacationPackage cart = (VacationPackage)Session["cart"];
             gvCars.DataSource = cart.CarReservations;
             gvCars.DataBind();
@@ -23,8 +31,12 @@ namespace TermProject
             gvEvents.DataSource = cart.EventReservations;
             gvEvents.DataBind();
 
-          
+        }
 
+        protected void btnLogOut_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            Response.Redirect("login.aspx");
         }
     }
 }

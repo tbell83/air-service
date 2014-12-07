@@ -58,7 +58,7 @@ namespace ECommerceLibrary
 
 
         // This function writes the cart to the database.
-        public int WriteCartToDB(Object cart, Object loginID)
+        public int WriteCartToDB(Object cart, string email)
         {
             // First, you must create a Stored Procedure, "UpdateCart" that will provide the
             // functionality to store the byte array for an object in your database
@@ -67,38 +67,62 @@ namespace ECommerceLibrary
             int returnValue;
 
             byteArray = SerializeToByteArray(cart);
-
-            objCommand.CommandText = "UpdateCart";          // *** CHANGE NAME TO YOUR STORED PROCEDURE'S NAME
+            //this updates cart that already exists
+            objCommand.CommandText = "WriteCart"; // *** CHANGE NAME TO YOUR STORED PROCEDURE'S NAME
             objCommand.CommandType = CommandType.StoredProcedure;
-
-            // Parameter names "Cart" and "LoginID" are the names I used in my Stored Procedure
-            // *** CHANGE PARAMETER NAMES TO THE ONES IN YOUR PROCEDURE
-            objCommand.Parameters.AddWithValue("@Cart", byteArray);
-            objCommand.Parameters.AddWithValue("@LoginID", loginID);
+   
+            objCommand.Parameters.AddWithValue("@cart", byteArray);
+            objCommand.Parameters.AddWithValue("@email", email);
             returnValue = objDB.DoUpdateUsingCmdObj(objCommand);
             return returnValue;
         }
 
+        //inserts a cart record into tp_carts, leaving vacationPackage for that record empty
+        public int CreateNewCart(string email) //returns -1 on failure
+        {
+            SqlCommand objCommand = new SqlCommand();
+            objCommand.CommandText = "CreateCart"; //will create a cart record with no vacationPackage for a customer
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.Parameters.AddWithValue("@email", email);
+            int returnValue = objDB.DoUpdateUsingCmdObj(objCommand);
+            return returnValue;
+        }
+
+        //returns true or false for whether or not a cart record exists for user
+        public bool CheckCartExists(string email) 
+        {
+            SqlCommand objCommand = new SqlCommand();
+            DataSet ds;
+
+            objCommand.CommandText = "ReadCart";
+            objCommand.CommandType = CommandType.StoredProcedure;
+
+            objCommand.Parameters.AddWithValue("@email", email);
+            ds = objDB.GetDataSetUsingCmdObj(objCommand);
+            if (ds.Tables[0].Rows.Count > 0)
+                return true;
+            else
+                return false;
+        }
+
         // This function reads the cart from the database.
-        public Object ReadCartFromDB(Object LoginID)
+        public Object ReadCartFromDB(string email) 
         {
             // First, you must provide a Stored Procedure named "ReadCart" that will return a byte array 
             SqlCommand objCommand = new SqlCommand();
             DataSet ds;
             Byte[] byteArray;
 
-            objCommand.CommandText = "ReadCart";            // *** CHANGE NAME TO YOUR STORED PROCEDURE'S NAME
+            objCommand.CommandText = "ReadCart";  
             objCommand.CommandType = CommandType.StoredProcedure;
 
-            // Parameter names "Cart" and "LoginID" are the names I used in my Stored Procedure
-            // *** CHANGE PARAMETER NAMES TO THE ONES IN YOUR PROCEDURE
-            objCommand.Parameters.AddWithValue("@LoginID", LoginID);
+            objCommand.Parameters.AddWithValue("@email", email);
             ds = objDB.GetDataSetUsingCmdObj(objCommand);
             DataRow record = ds.Tables[0].Rows[0];
 
-            if (record["cart"] != DBNull.Value)
+            if (record["vacationPackage"] != DBNull.Value)
             {
-                byteArray = (Byte[])record["Cart"];
+                byteArray = (Byte[])record["vacationPackage"];
                 return DeserializeFromByteArray(byteArray);
             }
             else

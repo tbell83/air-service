@@ -13,6 +13,9 @@
             </div>
         </div>
     </div>
+    <div class="btn-row btn-group-lg">
+        <asp:Button id= "btnLogOut" runat="server" Text="Log Out" OnClick="btnLogOut_Click" />
+    </div>
     <div class="btn-row">
         <asp:Button ID="btnSearchFlights" runat="server" Text ="Flights" OnClick="btnSearchFlights_Click" />
         <asp:Button ID="btnSearchHotels" runat="server" Text ="Hotels" OnClick="btnSearchHotels_Click" />
