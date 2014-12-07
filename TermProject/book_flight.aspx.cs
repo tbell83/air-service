@@ -17,6 +17,7 @@ namespace TermProject{
         int destinationAirportID;
         string destinationState;
         string destinationCity;
+        
 
         protected void Page_Load(object sender, EventArgs e){
             cityInfo = airService.getCities();
@@ -207,12 +208,65 @@ namespace TermProject{
         }
 
         protected void btnAddToCart_Click(object sender, EventArgs e){
+            List<Object> FlightReservation = new List<Object>();
+            int CarrierID = int.Parse(ddlCarriers.SelectedValue);
+            int OriginAirport = int.Parse(lblFrom.Text);
+            int DestinationAirport = int.Parse(lblTo.Text);
+
+            FlightReservation.Add(CarrierID);
+            FlightReservation.Add(OriginAirport);
+            FlightReservation.Add(DestinationAirport);
+
             foreach(GridViewRow row in gvAvailableFlights.Rows){
-                RadioButton radioButton = (RadioButton)row.FindControl("rbOutgoingFlightSelection");
+                RadioButton radioButton = (RadioButton)row.FindControl("rbFlightSelection");
                 if(radioButton.Checked){
-                    int outgoingFlightID = int.Parse(row.Cells[0].Text);
+                    List<Object> Outgoing = new List<object>();
+                    int outgoingFlightID = int.Parse(row.Cells[1].Text);
+                    Outgoing.Add(outgoingFlightID);
+                    Outgoing.Add(calOutgoingDate.SelectedDate);
+                    Outgoing.Add(ddlSeatType.SelectedItem.ToString());
+                    lblOutgoingFlightID.Text = outgoingFlightID.ToString();
+                    FlightReservation.Add(Outgoing);
                 }
             }
+
+            if(chkFlightType.Checked){
+                foreach(GridViewRow row in gvAvailableFlightsReturning.Rows){
+                    RadioButton radioButton = (RadioButton)row.FindControl("rbFlightSelection");
+                    if(radioButton.Checked){
+                        List<Object> Incoming = new List<object>();
+                        int incomingFlightID = int.Parse(row.Cells[1].Text);
+                        Incoming.Add(incomingFlightID);
+                        Incoming.Add(calIncomingDate.SelectedDate);
+                        Incoming.Add(ddlSeatType.SelectedItem.ToString());
+                        lblIncomingFlightID.Text = incomingFlightID.ToString();
+                        FlightReservation.Add(Incoming);
+                    }
+                }
+            }
+
+            Session["FlightReservation"] = FlightReservation;
+            Response.Redirect("./flight_confirm.aspx");
+        }
+
+        protected void rbOutgoingFlightSelection_CheckedChanged(object sender, EventArgs e){
+            foreach(GridViewRow otherRow in gvAvailableFlights.Rows){
+                ((RadioButton)otherRow.FindControl("rbFlightSelection")).Checked = false;
+            }
+
+            RadioButton rb = (RadioButton)sender;
+            GridViewRow row = (GridViewRow)rb.NamingContainer;
+            ((RadioButton)row.FindControl("rbFlightSelection")).Checked = true;
+        }
+
+        protected void rbIncomingFlightSelection_CheckedChanged(object sender, EventArgs e){
+            foreach(GridViewRow otherRow in gvAvailableFlightsReturning.Rows){
+                ((RadioButton)otherRow.FindControl("rbFlightSelection")).Checked = false;
+            }
+
+            RadioButton rb = (RadioButton)sender;
+            GridViewRow row = (GridViewRow)rb.NamingContainer;
+            ((RadioButton)row.FindControl("rbFlightSelection")).Checked = true;
         }
 
     }
