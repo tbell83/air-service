@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Collections;
 using System.Drawing;
+using ECommerceLibrary;
 
 namespace TermProject
 {
@@ -61,6 +62,7 @@ namespace TermProject
         protected void gvAgencies_SelectedIndexChanged(object sender, EventArgs e)
         {
             pnlCarResults.Visible = true;
+            lblErrorCars.Text = " "; 
             string city = gvAgencies.SelectedRow.Cells[4].Text;
             string state = gvAgencies.SelectedRow.Cells[5].Text;
             CarService.Agency agency = new CarService.Agency();
@@ -72,7 +74,8 @@ namespace TermProject
 
         protected void btnSearchByAmenities_Click(object sender, EventArgs e)
         {
-            pnlCarResults.Visible = true; 
+            pnlCarResults.Visible = true;
+            lblErrorCars.Text = " "; 
 
             CarService.Requirements reqs = new CarService.Requirements();
             reqs.GetCarType = ddlType.SelectedValue;
@@ -94,8 +97,32 @@ namespace TermProject
 
         protected void gvCars_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string carID = gvCars.SelectedRow.Cells[1].Text;
-            lblErrorCars.Text = "Car has been added to cart"; //customize this
+            CarService.Car car = new CarService.Car();
+            car.GetCarID = Int16.Parse(gvCars.SelectedRow.Cells[1].Text);
+            car.GetYearMade = gvCars.SelectedRow.Cells[2].Text;
+            car.GetMake = gvCars.SelectedRow.Cells[3].Text;
+            car.GetCarType = gvCars.SelectedRow.Cells[4].Text; //model
+            //type =5
+            car.GetnumberOfDoors = gvCars.SelectedRow.Cells[6].Text;
+            car.GetTransmission = gvCars.SelectedRow.Cells[7].Text;
+            car.GetHasNavigation = gvCars.SelectedRow.Cells[8].Text;
+            car.GetHasRearviewCamera = gvCars.SelectedRow.Cells[9].Text;
+            car.GetColor = gvCars.SelectedRow.Cells[10].Text;
+            car.GetIsAllWheelDrive = gvCars.SelectedRow.Cells[11].Text;
+            car.GetDailyRate = gvCars.SelectedRow.Cells[12].Text;
+
+            //BIND THE GRIDVIEW TO THE CORRECT FIELDS AND THEN FILL IN THE REST OF THESE WITH OTHER PARTS OF OBJECT
+            
+            
+            if (Session["cart"] != null)
+            {
+                VacationPackage cart = (VacationPackage)Session["cart"];
+                cart.CarReservations.Add(car); 
+                Session["cart"] = cart;
+            }
+
+
+            lblErrorCars.Text = "Car " + car.GetCarID + ": " + car.GetYearMade + " " + car.GetMake + " " + car.GetCarType + " has been added to your cart."; 
         }
     }
 }
