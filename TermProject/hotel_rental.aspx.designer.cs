@@ -238,6 +238,15 @@ namespace TermProject {
         protected global::System.Web.UI.WebControls.Button btnSearchRooms;
         
         /// <summary>
+        /// pnlRooms control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlRooms;
+        
+        /// <summary>
         /// gvRooms control.
         /// </summary>
         /// <remarks>
@@ -245,5 +254,14 @@ namespace TermProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvRooms;
+        
+        /// <summary>
+        /// lblErrorRooms control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorRooms;
     }
 }

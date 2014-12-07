@@ -183,19 +183,25 @@
             
             <p style="align-items:center"><asp:Button ID="btnSearchRooms" runat="server" Text ="Find Rooms" OnClick="btnSearchRooms_Click"  /></p>
         </div>
-        <br />
-        <br />
-        <asp:GridView ID="gvRooms" runat="server" CssClass="table" OnSelectedIndexChanged="gvRooms_SelectedIndexChanged" >
+      <asp:Panel ID="pnlRooms" runat="server" Visible="false" style="padding-top:15px">
+        <div class="btn-row col-lg-12 col-md-12" style="font-size:x-large">Hotel Rooms</div>
+        <div class="btn-row col-lg-12 col-md-12 col-sm-12" style="font-size:large">To add a room to your vacation package, click "Add to Cart" in the row for that room. </div>
+        <asp:GridView ID="gvRooms" runat="server" CssClass="table table-hover table-bordered" OnSelectedIndexChanged="gvRooms_SelectedIndexChanged" AutoGenerateColumns="False" >
             <Columns>
-                <%--<asp:BoundField DataField="Name" HeaderText="Hotel" />
+                <asp:CommandField AccessibleHeaderText="Add to Cart" ButtonType="Button" SelectText="Add to Cart " ShowSelectButton="True" />
+                <asp:BoundField DataField="Name" HeaderText="Hotel" />
+                <asp:BoundField DataField="RoomID" HeaderText="RoomID" />
                 <asp:BoundField DataField="RoomNum" HeaderText="Room Number" />
                 <asp:BoundField DataField="Price" DataFormatString="{0:c}" HeaderText="Price" />
-                <asp:BoundField DataField="Reserved" HeaderText="Reserved" />--%>
-                <asp:CommandField AccessibleHeaderText="Add to Cart" ButtonType="Button" SelectText="Add to Cart " ShowSelectButton="True" />
+                <asp:BoundField DataField="Reserved" HeaderText="Reserved" />
             </Columns>
         </asp:GridView>
-        <br />
-        <br />
+          <br />
+          <br />
+          <div class="btn-row col-lg-12 col-md-12" style ="padding: 15px">
+              <asp:Label ID="lblErrorRooms" runat="server" style="font-size:x-large" />
+          </div>
+        </asp:Panel>
     </asp:Panel>
     </div>
 </asp:Content>

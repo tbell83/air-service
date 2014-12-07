@@ -52,6 +52,7 @@ namespace TermProject
             btnNewSearch.Visible = false;
             btnSearch.Visible = true;
             pnlCars.Visible = false;
+            pnlCarResults.Visible = false;
             lblErrorMsg.Text = " ";
             txtCity.Text = "";
             ddlStates.SelectedIndex = 0;
@@ -59,16 +60,20 @@ namespace TermProject
 
         protected void gvAgencies_SelectedIndexChanged(object sender, EventArgs e)
         {
+            pnlCarResults.Visible = true;
             string city = gvAgencies.SelectedRow.Cells[4].Text;
             string state = gvAgencies.SelectedRow.Cells[5].Text;
             CarService.Agency agency = new CarService.Agency();
             agency.AgencyID = gvAgencies.SelectedRow.Cells[1].Text;
             gvCars.DataSource = carProxy.GetCars(agency, city, state);
             gvCars.DataBind();
+           
         }
 
         protected void btnSearchByAmenities_Click(object sender, EventArgs e)
         {
+            pnlCarResults.Visible = true; 
+
             CarService.Requirements reqs = new CarService.Requirements();
             reqs.GetCarType = ddlType.SelectedValue;
             reqs.Getmake = ddlMake.SelectedValue;
@@ -85,6 +90,12 @@ namespace TermProject
             gvCars.DataSource = carProxy.FindCars(reqs, gvAgencies.Rows[1].Cells[4].Text, gvAgencies.Rows[1].Cells[5].Text);
             gvCars.DataBind();
 
+        }
+
+        protected void gvCars_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string carID = gvCars.SelectedRow.Cells[1].Text;
+            lblErrorCars.Text = "Car has been added to cart"; //customize this
         }
     }
 }
