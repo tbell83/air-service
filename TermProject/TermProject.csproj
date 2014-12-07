@@ -63,6 +63,7 @@
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\master.css" />
+    <Content Include="flight_confirm.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="js\bootstrap.js" />
@@ -91,6 +92,13 @@
     </Compile>
     <Compile Include="book_flight.aspx.designer.cs">
       <DependentUpon>book_flight.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="flight_confirm.aspx.cs">
+      <DependentUpon>flight_confirm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="flight_confirm.aspx.designer.cs">
+      <DependentUpon>flight_confirm.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

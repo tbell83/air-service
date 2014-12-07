@@ -36,6 +36,8 @@
                 Incoming Date: <asp:Label ID="lblIncomingDate" runat="server" CssClass="label" /><br />
                 Carrier ID: <asp:Label ID="lblCarrierID" runat="server" CssClass="label" /><br />
                 Seat Type: <asp:label ID="lblSeatType2" runat="server" CssClass="label" /><br />
+                Outgoing Flight: <asp:Label ID="lblOutgoingFlightID" runat="server" CssClass="label" /><br />
+                Incoming Flight: <asp:Label ID="lblIncomingFlightID" runat="server" CssClass="label" /><br />
             </h3>
             <h3>Find Carriers:</h3>
             <asp:Button ID="btnFindCarriers" runat="server" Text="Find Carriers" OnClick="btnFindCarriers_Click" CssClass="btn-default btn"/>
@@ -55,7 +57,7 @@
                     <Columns>
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <input name="rbOutgoingFlightSelection" type="radio" runat="server" />
+                                <asp:RadioButton ID="rbFlightSelection" runat="server" GroupName="rbSelectOutgoing" AutoPostBack="true" OnCheckedChanged="rbOutgoingFlightSelection_CheckedChanged"/>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
@@ -66,7 +68,7 @@
                     <Columns>
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <input name="rbIncomingFlightSelection" type="radio" runat="server" />
+                                <asp:RadioButton ID="rbFlightSelection" runat="server" GroupName="rbSelectIncoming" AutoPostBack="true" OnCheckedChanged="rbIncomingFlightSelection_CheckedChanged" />
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
