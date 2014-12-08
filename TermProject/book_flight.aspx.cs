@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using ECommerceLibrary;
 
 namespace TermProject{
     public partial class book_flight : System.Web.UI.Page{
@@ -20,6 +21,12 @@ namespace TermProject{
         
 
         protected void Page_Load(object sender, EventArgs e){
+            //Check if user is logged in
+            if (Session["user"] == null){
+                Response.AddHeader("REFRESH", "50;URL=login.aspx");
+                Response.Redirect("login.aspx");
+            }
+
             cityInfo = airService.getCities();
             List<string> States = new List<string>();
 
@@ -181,7 +188,7 @@ namespace TermProject{
             }
 
             dsOutgoingFlights.AcceptChanges();
-
+            Session["outgoingFlights"] = dsOutgoingFlights;
             gvAvailableFlights.DataSource = dsOutgoingFlights;
             gvAvailableFlights.DataBind();
 
@@ -202,51 +209,48 @@ namespace TermProject{
                 }
                 dsIncomingFlights.AcceptChanges();
                 returning.Visible = true;
+                Session["incomingFlights"] = dsIncomingFlights;
                 gvAvailableFlightsReturning.DataSource = dsIncomingFlights;
                 gvAvailableFlightsReturning.DataBind();
             }
         }
 
         protected void btnAddToCart_Click(object sender, EventArgs e){
-            List<Object> FlightReservation = new List<Object>();
-            int CarrierID = int.Parse(ddlCarriers.SelectedValue);
-            int OriginAirport = int.Parse(lblFrom.Text);
-            int DestinationAirport = int.Parse(lblTo.Text);
 
-            FlightReservation.Add(CarrierID);
-            FlightReservation.Add(OriginAirport);
-            FlightReservation.Add(DestinationAirport);
+
+            DataSet outgoingFlights = (DataSet)Session["outgoingFlights"];
+            DataSet incomingFlights = (DataSet)Session["incomingFlights"];
+            DataSet flights = outgoingFlights.Copy();
+            
+            foreach(DataRow row in flights.Tables[0].Rows){
+                row.Delete();
+            }
+            flights.AcceptChanges();
 
             foreach(GridViewRow row in gvAvailableFlights.Rows){
                 RadioButton radioButton = (RadioButton)row.FindControl("rbFlightSelection");
                 if(radioButton.Checked){
-                    List<Object> Outgoing = new List<object>();
-                    int outgoingFlightID = int.Parse(row.Cells[1].Text);
-                    Outgoing.Add(outgoingFlightID);
-                    Outgoing.Add(calOutgoingDate.SelectedDate);
-                    Outgoing.Add(ddlSeatType.SelectedItem.ToString());
-                    lblOutgoingFlightID.Text = outgoingFlightID.ToString();
-                    FlightReservation.Add(Outgoing);
+                    DataRow newRow = outgoingFlights.Tables[0].Rows[row.RowIndex];
+                    flights.Tables[0].ImportRow(newRow);
                 }
             }
 
-            if(chkFlightType.Checked){
+            if(chkFlightType.Checked && (incomingFlights != null)){
                 foreach(GridViewRow row in gvAvailableFlightsReturning.Rows){
                     RadioButton radioButton = (RadioButton)row.FindControl("rbFlightSelection");
                     if(radioButton.Checked){
-                        List<Object> Incoming = new List<object>();
-                        int incomingFlightID = int.Parse(row.Cells[1].Text);
-                        Incoming.Add(incomingFlightID);
-                        Incoming.Add(calIncomingDate.SelectedDate);
-                        Incoming.Add(ddlSeatType.SelectedItem.ToString());
-                        lblIncomingFlightID.Text = incomingFlightID.ToString();
-                        FlightReservation.Add(Incoming);
+                        DataRow newRow = incomingFlights.Tables[0].Rows[row.RowIndex];
+                        flights.Tables[0].ImportRow(newRow);
                     }
                 }
             }
 
-            Session["FlightReservation"] = FlightReservation;
-            Response.Redirect("./flight_confirm.aspx");
+            VacationPackage cart = (VacationPackage)Session["cart"];
+            foreach(DataRow row in flights.Tables[0].Rows){
+                cart.FlightReservations.Add(row);
+            }
+            Session["cart"] = cart;
+            Response.Redirect("./shopping_cart.aspx");
         }
 
         protected void rbOutgoingFlightSelection_CheckedChanged(object sender, EventArgs e){

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using ECommerceLibrary;
 
 namespace TermProject{
     public partial class event_registration : System.Web.UI.Page{
@@ -20,8 +21,11 @@ namespace TermProject{
         List<string> activity = new List<string>();
 
         protected void Page_Load(object sender, EventArgs e){
-
-            if(!IsPostBack){
+            
+            //Check if user is logged in
+            if (Session["user"] == null){
+                Response.AddHeader("REFRESH", "50;URL=login.aspx");
+                Response.Redirect("login.aspx");
             }
         }
 
@@ -114,8 +118,12 @@ namespace TermProject{
                 }
             }
 
-            Session["EventsToRegister"] = events;
-            Response.Redirect("./event_confirmation.aspx");
+            VacationPackage cart = (VacationPackage)Session["cart"];
+            foreach(DataRow row in events.Tables[0].Rows){
+                cart.EventReservations.Add(row);
+            }
+            Session["cart"] = cart;
+            Response.Redirect("./shopping_cart.aspx");
         }
     }
 }
