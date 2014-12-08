@@ -11,5 +11,8 @@
     <Setting Name="TermProject_AirService_AirService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://cis-iis2.temple.edu/Fall2014/CIS3342_tuf01657/TermProjectWS/AirService.asmx</Value>
     </Setting>
+    <Setting Name="TermProject_EventService_WS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://cis-iis2.temple.edu/fall2014/cis3342_tuc72616/TermProjectWS/WS.asmx</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

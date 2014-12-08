@@ -63,6 +63,8 @@
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\master.css" />
+    <Content Include="event_confirmation.aspx" />
+    <Content Include="event_registration.aspx" />
     <Content Include="flight_confirm.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -79,6 +81,11 @@
     <Content Include="shopping_cart.aspx" />
     <None Include="Web References\AirService\AirService.disco" />
     <Content Include="Web References\CarService\CarWebService.disco" />
+    <Content Include="Web References\EventService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <Content Include="Web References\EventService\WS.disco" />
     <Content Include="Web References\HotelService\HotelService.disco" />
     <Content Include="Web.config" />
     <Content Include="dashboard.aspx" />
@@ -92,6 +99,20 @@
     </Compile>
     <Compile Include="book_flight.aspx.designer.cs">
       <DependentUpon>book_flight.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="event_confirmation.aspx.cs">
+      <DependentUpon>event_confirmation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="event_confirmation.aspx.designer.cs">
+      <DependentUpon>event_confirmation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="event_registration.aspx.cs">
+      <DependentUpon>event_registration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="event_registration.aspx.designer.cs">
+      <DependentUpon>event_registration.aspx</DependentUpon>
     </Compile>
     <Compile Include="flight_confirm.aspx.cs">
       <DependentUpon>flight_confirm.aspx</DependentUpon>
@@ -169,6 +190,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\EventService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\HotelService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -205,6 +231,7 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
+    <Content Include="Web References\EventService\WS.wsdl" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -233,6 +260,17 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
+    <WebReferenceUrl Include="http://cis-iis2.temple.edu/fall2014/cis3342_tuc72616/TermProjectWS/WS.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\EventService\</RelPath>
+      <UpdateFromURL>http://cis-iis2.temple.edu/fall2014/cis3342_tuc72616/TermProjectWS/WS.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>TermProject_EventService_WS</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="http://cis-iis2.temple.edu/Fall2014/CIS3342_tue50204/TermProjectWS/CarWebService.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\CarService\</RelPath>
