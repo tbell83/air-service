@@ -29,7 +29,7 @@
                             <li><a href="book_flight.aspx">Flights</a></li>
                             <li><a href="car_rental.aspx">Cars</a></li>
                             <li><a href="hotel_rental.aspx">Hotels</a></li>
-                            <li><a href="#">Events</a></li>
+                            <li><a href="event_registration.aspx">Events</a></li>
                             <li><a href="shopping_cart.aspx">Shopping Cart</a></li>
                           </ul>
                         </div>
