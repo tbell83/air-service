@@ -1,11 +1,11 @@
-﻿using System;
+﻿using ECommerceLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Utilities;
-using ECommerceLibrary;
 
 namespace TermProject
 {
@@ -30,13 +30,39 @@ namespace TermProject
             gvFlights.DataBind();
             gvEvents.DataSource = cart.EventReservations;
             gvEvents.DataBind();
-
         }
 
         protected void btnLogOut_Click(object sender, EventArgs e)
         {
             Session.Abandon();
             Response.Redirect("login.aspx");
+        }
+
+        protected void gvCars_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            VacationPackage cart = (VacationPackage)Session["cart"];
+            cart.CarReservations.RemoveAt(gvCars.SelectedIndex); //indeces will be same for arraylist and gv
+            gvCars.DataSource = cart.CarReservations;
+            gvCars.DataBind(); //updates gv of object removed
+            Session["cart"] = cart; 
+
+        }
+
+        protected void btnReserve_Click(object sender, EventArgs e)
+        {
+            VacationPackage cart = (VacationPackage)Session["cart"];
+            //iterate through cars
+
+            //iterate through hotels
+            for (int i = 0; i < cart.HotelReservations.Count; i++)
+            {
+                HotelRoom hr = (HotelRoom)cart.HotelReservations[i];
+                HotelService.Room room = new HotelService.Room();
+                room.RoomID = hr.RoomID; 
+
+
+            }
+
         }
     }
 }

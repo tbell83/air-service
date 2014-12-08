@@ -125,7 +125,7 @@ namespace TermProject
             string hotel = gvRooms.SelectedRow.Cells[1].Text;
             string roomID = gvRooms.SelectedRow.Cells[2].Text;
             string roomNum = gvRooms.SelectedRow.Cells[3].Text; 
-            //string price = gvRooms.SelectedRow.Cells[4].Text;
+            string price = gvRooms.SelectedRow.Cells[4].Text;
             
 
             if (reserved)
@@ -135,11 +135,11 @@ namespace TermProject
 
             else
             {
-                HotelService.Room room = new HotelService.Room();
+                //HotelService.Room room = new HotelService.Room();
+                HotelRoom room = new HotelRoom(); //class created in ecommercelibrary
                 room.RoomID = Int16.Parse(roomID);
-                room.RoomNumber = Int16.Parse(roomNum);
-                //room.Price = Int16.Parse(price); 
-                //find way to pass hotel and price into room obj
+                room.RoomNum = Int16.Parse(roomNum);
+                room.Price = Int16.Parse(price); 
 
 
                 if (Session["cart"] != null)
@@ -149,7 +149,8 @@ namespace TermProject
                     Session["cart"] = cart;
                 }
 
-                lblErrorRooms.Text = "Room " + roomNum + " at " + hotel + " has been added to your cart"; 
+                lblErrorRooms.Text = "Room " + roomNum + " at " + hotel + " has been added to your cart";
+                gvRooms.SelectedRow.Enabled = false; //check to see if this works
             }
         }
 
