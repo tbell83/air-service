@@ -98,9 +98,19 @@ namespace TermProject
                 HotelService.Customer cust = new HotelService.Customer();
                 cust.CustID = customerID;
 
-                hotelProxy.Reserve(room, cust); 
-
+                hotelProxy.Reserve(room, cust);
             }
+
+            //after all reservations have been made
+            if (Session["cart"] != null) //this if might not be necessary
+            {
+                s.WriteTransactionToDB(cart, customerID); 
+            }
+
+            cart = new VacationPackage();
+            Session["cart"] = cart;
+            Response.Redirect("shopping_cart.aspx"); 
+
         }
 
         protected void gvFlights_SelectedIndexChanged(object sender, EventArgs e){
