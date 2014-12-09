@@ -137,8 +137,10 @@ namespace TermProject
 
             cart = new VacationPackage();
             Session["cart"] = cart;
-            Response.Redirect("shopping_cart.aspx"); 
+            Response.Redirect("shopping_cart.aspx");
 
+            lblResponse.Visible = true;
+            btnReserve.Enabled = false; 
         }
 
         protected void gvFlights_SelectedIndexChanged(object sender, EventArgs e){
@@ -162,6 +164,8 @@ namespace TermProject
             gvEvents.DataSource = events;
             gvEvents.DataBind();
         }
+
+       
 
         
     }
