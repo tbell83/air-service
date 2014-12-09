@@ -49,7 +49,7 @@
 
         </asp:GridView>
 
-        <asp:GridView ID="gvFlights" runat="server" CssClass="table" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" ForeColor="Black" AutoGenerateColumns="false" >
+        <asp:GridView ID="gvFlights" runat="server" CssClass="table" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" ForeColor="Black" AutoGenerateColumns="false" OnSelectedIndexChanged="gvFlights_SelectedIndexChanged">
             <Columns>
                 <asp:CommandField ButtonType="Button" HeaderText="Remove From Cart" SelectText="Remove Item" ShowSelectButton="True" />
                 <asp:BoundField DataField="carrierName" HeaderText="Carrier" />
@@ -71,7 +71,7 @@
 
         </asp:GridView>
 
-        <asp:GridView ID="gvEvents" runat="server" CssClass="table" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" ForeColor="Black" AutoGenerateColumns="false" >
+        <asp:GridView ID="gvEvents" runat="server" CssClass="table" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" ForeColor="Black" AutoGenerateColumns="false" OnSelectedIndexChanged="gvEvents_SelectedIndexChanged">
             <Columns>
                 <asp:CommandField ButtonType="Button" HeaderText="Remove From Cart" SelectText="Remove Item" ShowSelectButton="True" />
                 <asp:BoundField DataField="EventDate" HeaderText="Date" />
