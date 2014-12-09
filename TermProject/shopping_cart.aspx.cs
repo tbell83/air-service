@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Utilities;
+using ECommerceLibrary;
+using System.Data;
 
 namespace TermProject
 {
@@ -20,16 +22,24 @@ namespace TermProject
                 Response.Redirect("login.aspx");
             }
 
-
             VacationPackage cart = (VacationPackage)Session["cart"];
+
+            try{
+                DataSet events = (DataSet)cart.EventReservations[0];
+                gvEvents.DataSource = events;
+                gvEvents.DataBind();
+            }catch{}
+
+            try{
+                DataSet flights = (DataSet)cart.FlightReservations[0];
+                gvFlights.DataSource = flights;
+                gvFlights.DataBind();
+            }catch{}
+
             gvCars.DataSource = cart.CarReservations;
             gvCars.DataBind();
             gvHotels.DataSource = cart.HotelReservations;
             gvHotels.DataBind();
-            gvFlights.DataSource = cart.FlightReservations;
-            gvFlights.DataBind();
-            gvEvents.DataSource = cart.EventReservations;
-            gvEvents.DataBind();
         }
 
         protected void btnLogOut_Click(object sender, EventArgs e)
