@@ -29,13 +29,13 @@
 
         </asp:GridView>
 
-        <asp:GridView ID="gvHotels" runat="server" CssClass="table" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" ForeColor="Black" AutoGenerateColumns="True" >
-          <%--  <Columns>
-                <asp:CommandField ButtonType="Button" DeleteText="Remove Item" HeaderText="Remove From Cart" ShowDeleteButton="True" />
+        <asp:GridView ID="gvHotels" runat="server" CssClass="table" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" ForeColor="Black" AutoGenerateColumns="True" OnSelectedIndexChanged="gvHotels_SelectedIndexChanged" >
+            <Columns>
+                <asp:CommandField ButtonType="Button" HeaderText="Remove From Cart" SelectText="Remove Item" ShowSelectButton="True" />
                 <asp:BoundField DataField="Hotel" HeaderText="Hotel" />
                 <asp:BoundField DataField="RoomNum" HeaderText="Room Number" />
                 <asp:BoundField DataField="Price" DataFormatString="{0:c}" HeaderText="Price " />
-            </Columns>--%>
+            </Columns>
             <FooterStyle BackColor="#CCCCCC" />
             <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
             <PagerStyle BackColor="#CCCCCC" ForeColor="Black" HorizontalAlign="Left" />

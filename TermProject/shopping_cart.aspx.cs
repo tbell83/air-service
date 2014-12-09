@@ -48,6 +48,15 @@ namespace TermProject
 
         }
 
+        protected void gvHotels_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            VacationPackage cart = (VacationPackage)Session["cart"];
+            cart.HotelReservations.RemoveAt(gvHotels.SelectedIndex); //indeces will be same for arraylist and gv
+            gvHotels.DataSource = cart.HotelReservations;
+            gvHotels.DataBind(); //updates gv of object removed
+            Session["cart"] = cart;
+        }
+
         protected void btnReserve_Click(object sender, EventArgs e)
         {
             VacationPackage cart = (VacationPackage)Session["cart"];
@@ -64,5 +73,7 @@ namespace TermProject
             }
 
         }
+
+        
     }
 }

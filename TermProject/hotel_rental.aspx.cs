@@ -139,7 +139,7 @@ namespace TermProject
                 HotelRoom room = new HotelRoom(); //class created in ecommercelibrary
                 room.RoomID = Int16.Parse(roomID);
                 room.RoomNum = Int16.Parse(roomNum);
-                room.Price = Int16.Parse(price); 
+                room.Price = Convert.ToInt32(price); 
 
 
                 if (Session["cart"] != null)
