@@ -301,9 +301,9 @@
       <wsdl:input message="tns:getFlightsToSoapIn" />
       <wsdl:output message="tns:getFlightsToSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="Reserve">
-      <wsdl:input name="ReserveSingle" message="tns:ReserveSingleSoapIn" />
-      <wsdl:output name="ReserveSingle" message="tns:ReserveSingleSoapOut" />
+    <wsdl:operation name="ReserveSingle">
+      <wsdl:input message="tns:ReserveSingleSoapIn" />
+      <wsdl:output message="tns:ReserveSingleSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="Reserve">
       <wsdl:input message="tns:ReserveSoapIn" />
@@ -374,12 +374,12 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Reserve">
+    <wsdl:operation name="ReserveSingle">
       <soap:operation soapAction="http://tempuri.org/ReserveSingle" style="document" />
-      <wsdl:input name="ReserveSingle">
+      <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="ReserveSingle">
+      <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -467,12 +467,12 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Reserve">
+    <wsdl:operation name="ReserveSingle">
       <soap12:operation soapAction="http://tempuri.org/ReserveSingle" style="document" />
-      <wsdl:input name="ReserveSingle">
+      <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="ReserveSingle">
+      <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

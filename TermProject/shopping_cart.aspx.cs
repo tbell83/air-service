@@ -87,7 +87,35 @@ namespace TermProject
             string email = Session["user"].ToString();
             int customerID = s.GetCustomerIDFromEmail(email); 
 
+            //iterate events
+            DataSet events = (DataSet)cart.EventReservations[0];
+            EventService.WS eventService = new EventService.WS();
+            foreach(DataRow row in events.Tables[0].Rows){
+                eventService.Reserve((int)row[0], customerID);
+            }
+
+            //iterate flights
+            DataSet flights = (DataSet)cart.FlightReservations[0];
+            AirService.AirService airService = new AirService.AirService();
+            foreach(DataRow row in flights.Tables[0].Rows){
+                int flightID = (int)row[0];
+                string seatType = "First Class";
+                if(row[5] != ""){
+                    seatType = "Economy";
+                }
+                string date = (string)row[5];
+                try{
+                    airService.ReserveSingle(customerID, flightID, seatType, date);
+                }catch{}
+            }
+
             //iterate through cars
+            foreach(CarService.Car car in cart.CarReservations){
+                CarService.Customer customer = new CarService.Customer();
+                customer.custID = customerID;
+                CarService.CarWebService carService = new CarService.CarWebService();
+                carService.Reserve(car, customer);
+            }
 
             //iterate through hotels
             for (int i = 0; i < cart.HotelReservations.Count; i++)
