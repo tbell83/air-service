@@ -9,7 +9,7 @@
         <div style="font-size:x-large; text-align:center; padding:5px">Shopping Cart</div>
         <asp:GridView ID="gvCars" runat="server" CssClass="table" AutoGenerateColumns="False" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" ForeColor="Black" OnSelectedIndexChanged="gvCars_SelectedIndexChanged" >
             <Columns>
-                <asp:CommandField AccessibleHeaderText="Remove From Cart" ButtonType="Button" DeleteText="Remove Item" ShowDeleteButton="True" HeaderText="Remove From Cart" />
+                <asp:CommandField ButtonType="Button" HeaderText="Remove From Cart" SelectText="Remove Item" ShowSelectButton="True" />
                 <asp:BoundField DataField="GetCarID" HeaderText="Car ID" />
                 <asp:BoundField DataField="GetMake" HeaderText="Make" />
                 <asp:BoundField DataField="GetCarType" HeaderText="Model" />
@@ -29,13 +29,13 @@
 
         </asp:GridView>
 
-        <asp:GridView ID="gvHotels" runat="server" CssClass="table" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" ForeColor="Black" AutoGenerateColumns="False" >
-            <Columns>
+        <asp:GridView ID="gvHotels" runat="server" CssClass="table" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" ForeColor="Black" AutoGenerateColumns="True" >
+          <%--  <Columns>
                 <asp:CommandField ButtonType="Button" DeleteText="Remove Item" HeaderText="Remove From Cart" ShowDeleteButton="True" />
                 <asp:BoundField DataField="Hotel" HeaderText="Hotel" />
                 <asp:BoundField DataField="RoomNum" HeaderText="Room Number" />
                 <asp:BoundField DataField="Price" DataFormatString="{0:c}" HeaderText="Price " />
-            </Columns>
+            </Columns>--%>
             <FooterStyle BackColor="#CCCCCC" />
             <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
             <PagerStyle BackColor="#CCCCCC" ForeColor="Black" HorizontalAlign="Left" />
