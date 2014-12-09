@@ -93,6 +93,9 @@ namespace TermProject{
         }
 
         protected void btnSelectEvents_Click(object sender, EventArgs e){
+            VacationPackage cart = (VacationPackage)Session["cart"];
+            DataSet eventsFromCart = (DataSet)cart.EventReservations[0];
+
             List<int> eventsToRegister = new List<int>();
             if(Session["EventsToRegister"] != null){
                 events = (DataSet)Session["EventsToRegister"];
@@ -119,7 +122,10 @@ namespace TermProject{
             }
             events.AcceptChanges();
 
-            VacationPackage cart = (VacationPackage)Session["cart"];
+            foreach(DataRow row in events.Tables[0].Rows){
+                eventsFromCart.Tables[0].ImportRow(row);
+            }
+
             cart.EventReservations.Add(events);
             Session["cart"] = cart;
             Response.Redirect("./shopping_cart.aspx");

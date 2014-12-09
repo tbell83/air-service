@@ -216,17 +216,12 @@ namespace TermProject{
         }
 
         protected void btnAddToCart_Click(object sender, EventArgs e){
+            VacationPackage cart = (VacationPackage)Session["cart"];
 
-
+            DataSet flights = (DataSet)cart.FlightReservations[0];
             DataSet outgoingFlights = (DataSet)Session["outgoingFlights"];
             DataSet incomingFlights = (DataSet)Session["incomingFlights"];
-            DataSet flights = outgoingFlights.Copy();
-            
-            foreach(DataRow row in flights.Tables[0].Rows){
-                row.Delete();
-            }
-            flights.AcceptChanges();
-
+ 
             foreach(GridViewRow row in gvAvailableFlights.Rows){
                 RadioButton radioButton = (RadioButton)row.FindControl("rbFlightSelection");
                 if(radioButton.Checked){
@@ -245,7 +240,6 @@ namespace TermProject{
                 }
             }
 
-            VacationPackage cart = (VacationPackage)Session["cart"];
             cart.FlightReservations.Add(flights);
             Session["cart"] = cart;
             Response.Redirect("./shopping_cart.aspx");

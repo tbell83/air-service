@@ -49,7 +49,16 @@
 
         </asp:GridView>
 
-        <asp:GridView ID="gvFlights" runat="server" CssClass="table" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" ForeColor="Black">
+        <asp:GridView ID="gvFlights" runat="server" CssClass="table" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" ForeColor="Black" AutoGenerateColumns="false" >
+            <Columns>
+                <asp:CommandField ButtonType="Button" HeaderText="Remove From Cart" SelectText="Remove Item" ShowSelectButton="True" />
+                <asp:BoundField DataField="carrierName" HeaderText="Carrier" />
+                <asp:BoundField DataField="originCity" HeaderText="Origin City" />
+                <asp:BoundField DataField="destinationCity" HeaderText="Destination City" />
+                <asp:BoundField DataField="departureTime" HeaderText="Departure" />
+                <asp:BoundField DataField="economyPrice" DataFormatString="{0:c}" HeaderText="Price " />
+                <asp:BoundField DataField="firstClassPrice" DataFormatString="{0:c}" HeaderText="Price " />
+            </Columns>
             <FooterStyle BackColor="#CCCCCC" />
             <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
             <PagerStyle BackColor="#CCCCCC" ForeColor="Black" HorizontalAlign="Left" />
@@ -62,7 +71,16 @@
 
         </asp:GridView>
 
-        <asp:GridView ID="gvEvents" runat="server" CssClass="table" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" ForeColor="Black" >
+        <asp:GridView ID="gvEvents" runat="server" CssClass="table" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" ForeColor="Black" AutoGenerateColumns="false" >
+            <Columns>
+                <asp:CommandField ButtonType="Button" HeaderText="Remove From Cart" SelectText="Remove Item" ShowSelectButton="True" />
+                <asp:BoundField DataField="EventDate" HeaderText="Date" />
+                <asp:BoundField DataField="EventTime" HeaderText="Time" />
+                <asp:BoundField DataField="EventName" HeaderText="Name" />
+                <asp:BoundField DataField="City" HeaderText="City" />
+                <asp:BoundField DataField="TicketPrice" HeaderText="Price" DataFormatString="{0:c}" />
+                <asp:BoundField DataField="Venue" HeaderText="Venue" />
+            </Columns>
             <FooterStyle BackColor="#CCCCCC" />
             <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
             <PagerStyle BackColor="#CCCCCC" ForeColor="Black" HorizontalAlign="Left" />
