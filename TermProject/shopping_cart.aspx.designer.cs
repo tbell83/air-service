@@ -22,6 +22,15 @@ namespace TermProject {
         protected global::System.Web.UI.WebControls.Button btnLogOut;
         
         /// <summary>
+        /// btnReserve control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnReserve;
+        
+        /// <summary>
         /// gvCars control.
         /// </summary>
         /// <remarks>
@@ -56,14 +65,5 @@ namespace TermProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvEvents;
-        
-        /// <summary>
-        /// btnReserve control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnReserve;
     }
 }

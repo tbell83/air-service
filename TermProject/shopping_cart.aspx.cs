@@ -78,8 +78,6 @@ namespace TermProject
                 HotelRoom hr = (HotelRoom)cart.HotelReservations[i];
                 HotelService.Room room = new HotelService.Room();
                 room.RoomID = hr.RoomID; 
-
-
             }
 
         }
