@@ -56,6 +56,7 @@
                 <asp:BoundField DataField="originCity" HeaderText="Origin City" />
                 <asp:BoundField DataField="destinationCity" HeaderText="Destination City" />
                 <asp:BoundField DataField="departureTime" HeaderText="Departure" />
+                <asp:BoundField DataField="date" HeaderText="Date" />
                 <asp:BoundField DataField="economyPrice" DataFormatString="{0:c}" HeaderText="Price " />
                 <asp:BoundField DataField="firstClassPrice" DataFormatString="{0:c}" HeaderText="Price " />
             </Columns>

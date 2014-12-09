@@ -221,11 +221,17 @@ namespace TermProject{
             DataSet flights = (DataSet)cart.FlightReservations[0];
             DataSet outgoingFlights = (DataSet)Session["outgoingFlights"];
             DataSet incomingFlights = (DataSet)Session["incomingFlights"];
+
+            outgoingFlights.Tables[0].Columns.Add("date", typeof(string));
+            if(chkFlightType.Checked){
+                incomingFlights.Tables[0].Columns.Add("date", typeof(string));
+            }
  
             foreach(GridViewRow row in gvAvailableFlights.Rows){
                 RadioButton radioButton = (RadioButton)row.FindControl("rbFlightSelection");
                 if(radioButton.Checked){
                     DataRow newRow = outgoingFlights.Tables[0].Rows[row.RowIndex];
+                    newRow[8] = calOutgoingDate.SelectedDate.ToShortDateString();
                     flights.Tables[0].ImportRow(newRow);
                 }
             }
@@ -235,6 +241,7 @@ namespace TermProject{
                     RadioButton radioButton = (RadioButton)row.FindControl("rbFlightSelection");
                     if(radioButton.Checked){
                         DataRow newRow = incomingFlights.Tables[0].Rows[row.RowIndex];
+                        newRow[8] = calIncomingDate.SelectedDate.ToShortDateString();
                         flights.Tables[0].ImportRow(newRow);
                     }
                 }

@@ -33,6 +33,7 @@ namespace TermProject{
                 flights.Tables[0].Columns.Add("OriginCity", typeof(string));
                 flights.Tables[0].Columns.Add("DestinationCity", typeof(string));
                 flights.Tables[0].Columns.Add("departureTime", typeof(string));
+                flights.Tables[0].Columns.Add("date", typeof(string));
                 flights.Tables[0].Columns.Add("economyPrice", typeof(double));
                 flights.Tables[0].Columns.Add("economySeats", typeof(int));
                 flights.Tables[0].Columns.Add("firstClassPrice", typeof(double));
