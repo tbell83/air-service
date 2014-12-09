@@ -13,14 +13,21 @@ namespace TermProject
 {
     public partial class shopping_cart : System.Web.UI.Page
     {
+
+        HotelService.HotelService hotelProxy = new HotelService.HotelService();
+        AirService.AirService airProxy = new AirService.AirService();
+        CarService.CarWebService carProxy = new CarService.CarWebService();
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
             if (Session["user"] == null)
             {
                 Response.AddHeader("REFRESH", "50;URL=login.aspx");
                 Response.Redirect("login.aspx");
             }
+
+           
 
             VacationPackage cart = (VacationPackage)Session["cart"];
 
@@ -40,6 +47,8 @@ namespace TermProject
             gvCars.DataBind();
             gvHotels.DataSource = cart.HotelReservations;
             gvHotels.DataBind();
+
+
         }
 
         protected void btnLogOut_Click(object sender, EventArgs e)
@@ -70,6 +79,11 @@ namespace TermProject
         protected void btnReserve_Click(object sender, EventArgs e)
         {
             VacationPackage cart = (VacationPackage)Session["cart"];
+
+            Serialize s = new Serialize();
+            string email = Session["user"].ToString();
+            int customerID = s.GetCustomerIDFromEmail(email); 
+
             //iterate through cars
 
             //iterate through hotels
@@ -77,9 +91,13 @@ namespace TermProject
             {
                 HotelRoom hr = (HotelRoom)cart.HotelReservations[i];
                 HotelService.Room room = new HotelService.Room();
-                room.RoomID = hr.RoomID; 
-            }
+                room.RoomID = hr.RoomID;
+                HotelService.Customer cust = new HotelService.Customer();
+                cust.CustID = customerID;
 
+                hotelProxy.Reserve(room, cust); 
+                
+            }
         }
 
         

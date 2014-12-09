@@ -141,7 +141,6 @@ namespace TermProject
                 room.RoomNum = Int16.Parse(roomNum);
                 room.Price = Convert.ToInt32(price); 
 
-
                 if (Session["cart"] != null)
                 {
                     VacationPackage cart = (VacationPackage)Session["cart"];
