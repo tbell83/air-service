@@ -93,6 +93,9 @@
             <SortedDescendingHeaderStyle BackColor="#383838" />
 
         </asp:GridView>
+
+        <h1>Total:</h1>
+        <asp:Label ID="lblTotal" runat="server" />
         <br />
         <br />
         <asp:Label ID="lblResponse" runat="server" Text ="Congratulations, you've successfully booked your vacation!" Visible="false"/>

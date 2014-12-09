@@ -20,7 +20,7 @@ namespace TermProject
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            double total = 0;
             if (Session["user"] == null)
             {
                 Response.AddHeader("REFRESH", "50;URL=login.aspx");
@@ -35,23 +35,40 @@ namespace TermProject
                 DataSet events = (DataSet)cart.EventReservations[0];
                 gvEvents.DataSource = events;
                 gvEvents.DataBind();
+
+                foreach(GridViewRow row in gvEvents.Rows){
+                    total = total + double.Parse(row.Cells[5].Text.ToString().Replace("$",""));
+                }
             }catch{}
 
             try{
                 DataSet flights = (DataSet)cart.FlightReservations[0];
                 gvFlights.DataSource = flights;
                 gvFlights.DataBind();
+                
+                foreach(GridViewRow row in gvFlights.Rows){
+                    total = total + double.Parse(row.Cells[6].Text.ToString().Replace("$","")) + double.Parse(row.Cells[7].Text.ToString().Replace("$",""));
+                }
             }catch{}
 
             try{
                 gvCars.DataSource = cart.CarReservations;
                 gvCars.DataBind();
+
+                foreach(GridViewRow row in gvCars.Rows){
+                    total = total + double.Parse(row.Cells[5].Text.ToString());
+                }
             }catch{}
 
             try{
                 gvHotels.DataSource = cart.HotelReservations;
                 gvHotels.DataBind();
+                foreach(GridViewRow row in gvHotels.Rows){
+                    total = total + double.Parse(row.Cells[3].Text.ToString().Replace("$",""));
+                }
             }catch{}
+
+            lblTotal.Text = total.ToString();
         }
 
         protected void btnLogOut_Click(object sender, EventArgs e)
