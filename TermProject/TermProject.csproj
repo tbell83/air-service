@@ -84,7 +84,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
     <Content Include="Web References\EventService\WS.disco" />
-    <Content Include="Web References\HotelService\HotelService.disco" />
+    <None Include="Web References\HotelService\HotelService.disco" />
     <Content Include="Web.config" />
     <Content Include="dashboard.aspx" />
     <Content Include="car_rental.aspx" />
@@ -205,11 +205,11 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="Web References\HotelService\HotelService.wsdl" />
-    <Content Include="Web References\HotelService\Reference.map">
+    <None Include="Web References\HotelService\HotelService.wsdl" />
+    <None Include="Web References\HotelService\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
+    </None>
     <Content Include="Web References\CarService\CarWebService.wsdl" />
     <Content Include="Web References\CarService\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
