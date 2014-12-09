@@ -93,6 +93,9 @@
             <SortedDescendingHeaderStyle BackColor="#383838" />
 
         </asp:GridView>
+        <br />
+        <br />
+        <asp:Label ID="lblResponse" runat="server" Text ="Congratulations, you've successfully booked your vacation!" Visible="false"/>
         
     </div>
     
