@@ -93,6 +93,9 @@
             <SortedDescendingHeaderStyle BackColor="#383838" />
 
         </asp:GridView>
+
+        <h1>Total:</h1>
+        <asp:Label ID="lblTotal" runat="server" />
         
     </div>
     

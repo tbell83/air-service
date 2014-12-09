@@ -19,7 +19,6 @@ namespace TermProject{
         string destinationState;
         string destinationCity;
         
-
         protected void Page_Load(object sender, EventArgs e){
             //Check if user is logged in
             if (Session["user"] == null){
@@ -42,8 +41,8 @@ namespace TermProject{
                 incomingDate.Visible = false;
             }
 
-            lblSeatType2.Text = ddlSeatType.SelectedItem.ToString();
-            lblCarrierID.Text = ddlCarriers.SelectedValue.ToString();
+            //lblSeatType2.Text = ddlSeatType.SelectedItem.ToString();
+            //lblCarrierID.Text = ddlCarriers.SelectedValue.ToString();
 
             if(!IsPostBack){
                 ddlState.Items.Clear();
@@ -80,7 +79,7 @@ namespace TermProject{
         protected void ddlAirport_SelectedIndexChanged(object sender, EventArgs e){
             if(ddlAirport.SelectedItem.ToString() == "--Select an Airport--"){ return; }
             originAirportID = int.Parse(ddlAirport.SelectedValue.ToString());
-            lblFrom.Text = originAirportID.ToString();
+            //lblFrom.Text = originAirportID.ToString();
         }
 
         protected void ddlCity_SelectedIndexChanged(object sender, EventArgs e){
@@ -108,8 +107,8 @@ namespace TermProject{
             ddlAirport.DataValueField = "ID";
             ddlAirport.DataBind();
 
-            lblOutgoingDate.Text = calOutgoingDate.SelectedDate.ToShortDateString();
-            lblIncomingDate.Text = calIncomingDate.SelectedDate.ToShortDateString();
+            //lblOutgoingDate.Text = calOutgoingDate.SelectedDate.ToShortDateString();
+            //lblIncomingDate.Text = calIncomingDate.SelectedDate.ToShortDateString();
         }
 
         protected void ddlArrivalState_SelectedIndexChanged(object sender, EventArgs e){
@@ -133,7 +132,7 @@ namespace TermProject{
         protected void ddlArrivalAirport_SelectedIndexChanged(object sender, EventArgs e){
             if(ddlArrivalAirport.SelectedItem.ToString() == "--Select an Airport--"){ return; }
             destinationAirportID = int.Parse(ddlArrivalAirport.SelectedValue.ToString());
-            lblTo.Text = destinationAirportID.ToString();
+            //lblTo.Text = destinationAirportID.ToString();
         }
 
         protected void ddlArrivalCity_SelectedIndexChanged(object sender, EventArgs e){

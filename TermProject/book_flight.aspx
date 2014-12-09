@@ -30,15 +30,6 @@
             <asp:DropDownList ID="ddlArrivalCity" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlArrivalCity_SelectedIndexChanged" AppendDataBoundItems="true" CssClass="dropdown"/>
             <asp:Label ID="lblArrivalAirport" runat="server" Text="Airport:" CssClass="label" />
             <asp:DropDownList ID="ddlArrivalAirport" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlArrivalAirport_SelectedIndexChanged" AppendDataBoundItems="true" CssClass="dropdown"/>
-            <h3>From Airport ID: <asp:Label ID="lblFrom" runat="server" CssClass="label" /><br />
-                To Airport ID: <asp:Label ID="lblTo" runat="server" CssClass="label" /><br />
-                Outgoing Date: <asp:Label ID="lblOutgoingDate" runat="server" cssclass="label" /><br />
-                Incoming Date: <asp:Label ID="lblIncomingDate" runat="server" CssClass="label" /><br />
-                Carrier ID: <asp:Label ID="lblCarrierID" runat="server" CssClass="label" /><br />
-                Seat Type: <asp:label ID="lblSeatType2" runat="server" CssClass="label" /><br />
-                Outgoing Flight: <asp:Label ID="lblOutgoingFlightID" runat="server" CssClass="label" /><br />
-                Incoming Flight: <asp:Label ID="lblIncomingFlightID" runat="server" CssClass="label" /><br />
-            </h3>
             <h3>Find Carriers:</h3>
             <asp:Button ID="btnFindCarriers" runat="server" Text="Find Carriers" OnClick="btnFindCarriers_Click" CssClass="btn-default btn"/>
             <asp:Label ID="lblCarriers" runat="server" Text="Carrier" CssClass="label" />
