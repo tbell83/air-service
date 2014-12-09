@@ -117,11 +117,10 @@ namespace TermProject{
                     row.Delete();
                 }
             }
+            events.AcceptChanges();
 
             VacationPackage cart = (VacationPackage)Session["cart"];
-            foreach(DataRow row in events.Tables[0].Rows){
-                cart.EventReservations.Add(row);
-            }
+            cart.EventReservations.Add(events);
             Session["cart"] = cart;
             Response.Redirect("./shopping_cart.aspx");
         }

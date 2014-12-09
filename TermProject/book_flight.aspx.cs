@@ -246,9 +246,7 @@ namespace TermProject{
             }
 
             VacationPackage cart = (VacationPackage)Session["cart"];
-            foreach(DataRow row in flights.Tables[0].Rows){
-                cart.FlightReservations.Add(row);
-            }
+            cart.FlightReservations.Add(flights);
             Session["cart"] = cart;
             Response.Redirect("./shopping_cart.aspx");
         }
