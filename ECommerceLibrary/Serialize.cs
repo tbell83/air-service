@@ -71,6 +71,26 @@ namespace ECommerceLibrary
         }
 
         // This function writes the cart to the database.
+        public int WriteTransactionToDB(Object cart, int customerID)
+        {
+            // First, you must create a Stored Procedure, "UpdateCart" that will provide the
+            // functionality to store the byte array for an object in your database
+            Byte[] byteArray;
+            SqlCommand objCommand = new SqlCommand();
+            int returnValue;
+
+            byteArray = SerializeToByteArray(cart);
+            //this updates cart that already exists
+            objCommand.CommandText = "WriteTransaction"; 
+            objCommand.CommandType = CommandType.StoredProcedure;
+
+            objCommand.Parameters.AddWithValue("@cart", byteArray);
+            objCommand.Parameters.AddWithValue("@customerID", customerID);
+            returnValue = objDB.DoUpdateUsingCmdObj(objCommand);
+            return returnValue;
+        }
+
+        // This function writes the cart to the database.
         public int WriteCartToDB(Object cart, string email)
         {
             // First, you must create a Stored Procedure, "UpdateCart" that will provide the

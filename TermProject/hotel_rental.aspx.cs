@@ -121,20 +121,20 @@ namespace TermProject
 
         protected void gvRooms_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Boolean reserved = Convert.ToBoolean(gvRooms.SelectedRow.Cells[5].Text);
+            //Boolean reserved = Convert.ToBoolean(gvRooms.SelectedRow.Cells[5].Text);
             string hotel = gvRooms.SelectedRow.Cells[1].Text;
             string roomID = gvRooms.SelectedRow.Cells[2].Text;
             string roomNum = gvRooms.SelectedRow.Cells[3].Text; 
             string price = gvRooms.SelectedRow.Cells[4].Text;
             
 
-            if (reserved)
-            {
-                lblErrorRooms.Text = "Sorry, that room is already reserved.";
-            }
+            //if (reserved)
+            //{
+            //    lblErrorRooms.Text = "Sorry, that room is already reserved.";
+            //}
 
-            else
-            {
+            //else
+            //{
                 //HotelService.Room room = new HotelService.Room();
                 HotelRoom room = new HotelRoom(); //class created in ecommercelibrary
                 room.RoomID = Int16.Parse(roomID);
@@ -149,8 +149,8 @@ namespace TermProject
                 }
 
                 lblErrorRooms.Text = "Room " + roomNum + " at " + hotel + " has been added to your cart";
-                gvRooms.SelectedRow.Enabled = false; //check to see if this works
-            }
+                
+            //}
         }
 
     }
