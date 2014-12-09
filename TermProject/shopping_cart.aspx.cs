@@ -103,6 +103,28 @@ namespace TermProject
             }
         }
 
+        protected void gvFlights_SelectedIndexChanged(object sender, EventArgs e){
+            VacationPackage cart = (VacationPackage)Session["cart"];
+            DataSet flights = (DataSet)cart.FlightReservations[0];
+            cart.FlightReservations.RemoveAt(0);
+            flights.Tables[0].Rows.RemoveAt(gvFlights.SelectedIndex);
+            cart.FlightReservations.Add(flights);
+            Session["cart"] = cart;
+            gvFlights.DataSource = flights;
+            gvFlights.DataBind();
+        }
+
+        protected void gvEvents_SelectedIndexChanged(object sender, EventArgs e){
+            VacationPackage cart = (VacationPackage)Session["cart"];
+            DataSet events = (DataSet)cart.FlightReservations[0];
+            cart.EventReservations.RemoveAt(0);
+            events.Tables[0].Rows.RemoveAt(gvEvents.SelectedIndex);
+            cart.EventReservations.Add(events);
+            Session["cart"] = cart;
+            gvEvents.DataSource = events;
+            gvEvents.DataBind();
+        }
+
         
     }
 }
