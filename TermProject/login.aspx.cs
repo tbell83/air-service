@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Net;
 using ECommerceLibrary;
+using System.Data;
 
 namespace TermProject{
     public partial class login : System.Web.UI.Page{
@@ -25,6 +26,32 @@ namespace TermProject{
                     DeleteCookie();
                 }
 
+                DataSet flights = new DataSet();
+                flights.Tables.Add(new DataTable());
+                flights.Tables[0].Columns.Add("flightID", typeof(int));
+                flights.Tables[0].Columns.Add("carrierName", typeof(string));
+                flights.Tables[0].Columns.Add("OriginCity", typeof(string));
+                flights.Tables[0].Columns.Add("DestinationCity", typeof(string));
+                flights.Tables[0].Columns.Add("departureTime", typeof(string));
+                flights.Tables[0].Columns.Add("economyPrice", typeof(double));
+                flights.Tables[0].Columns.Add("economySeats", typeof(int));
+                flights.Tables[0].Columns.Add("firstClassPrice", typeof(double));
+                flights.Tables[0].Columns.Add("firstClassSeats", typeof(int));
+                flights.Tables[0].Columns.Add("seatsAvailable", typeof(int));
+                DataSet events = new DataSet();
+                events.Tables.Add(new DataTable());
+                events.Tables[0].Columns.Add("EventID", typeof(int));
+                events.Tables[0].Columns.Add("AgencyID", typeof(int));
+                events.Tables[0].Columns.Add("CustomerID", typeof(int));
+                events.Tables[0].Columns.Add("EventDate", typeof(string));
+                events.Tables[0].Columns.Add("EventTime", typeof(string));
+                events.Tables[0].Columns.Add("EventName", typeof(string));
+                events.Tables[0].Columns.Add("Activity", typeof(string));
+                events.Tables[0].Columns.Add("City", typeof(string));
+                events.Tables[0].Columns.Add("State", typeof(string));
+                events.Tables[0].Columns.Add("Capacity", typeof(int));
+                events.Tables[0].Columns.Add("TicketPrice", typeof(int));
+                events.Tables[0].Columns.Add("Venue", typeof(string));
 
                 Serialize s = new Serialize();
                 VacationPackage cart;
@@ -45,7 +72,11 @@ namespace TermProject{
                     s.CreateNewCart(user);
                     cart = new VacationPackage(); //get a new cart set up for them
                 }
-                Session["cart"] = cart; 
+
+                cart.FlightReservations.Add(flights);
+                cart.EventReservations.Add(events);
+
+                Session["cart"] = cart;
 
                 Response.Redirect("dashboard.aspx");
             }

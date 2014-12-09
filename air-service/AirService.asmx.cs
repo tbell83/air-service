@@ -136,8 +136,8 @@ namespace air_service{
             return flightsTo;
         }
 
-        [WebMethod(MessageName="ReserveSingle")]
-        public Boolean Reserve(int customerID, int flightID, string seatType, string dateTime){
+        [WebMethod]
+        public Boolean ReserveSingle(int customerID, int flightID, string seatType, string dateTime){
             DateTime flightDate = Convert.ToDateTime(dateTime);
             bool success;
             if (CheckAvailability(flightID, flightDate, seatType)){
@@ -212,7 +212,7 @@ namespace air_service{
         }
 
 
-        [WebMethod(MessageName="Reserve")]
+        [WebMethod]
         public Boolean Reserve(int customerID, int flightID1, string seatType1, string dt1, int flightID2, string seatType2, string dt2)  //default params for flightID2, seatType2, dt2 make them optional
         {
             DateTime flightDate1 = Convert.ToDateTime(dt1);
