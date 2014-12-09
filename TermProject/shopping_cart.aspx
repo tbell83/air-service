@@ -7,7 +7,7 @@
     </div>
     <div class="row col-lg-12 col-md-12">
         <div style="font-size:x-large; text-align:center; padding:5px">Shopping Cart</div>
-        <asp:GridView ID="gvCars" runat="server" CssClass="table" AutoGenerateColumns="False" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" ForeColor="Black" OnSelectedIndexChanged="gvCars_SelectedIndexChanged" >
+        <asp:GridView ID="gvCars" runat="server" CssClass="table" AutoGenerateColumns="False" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" ForeColor="Black" OnSelectedIndexChanged="gvCars_SelectedIndexChanged" ShowFooter="true">
             <Columns>
                 <asp:CommandField ButtonType="Button" HeaderText="Remove From Cart" SelectText="Remove Item" ShowSelectButton="True" />
                 <asp:BoundField DataField="GetCarID" HeaderText="Car ID" />
@@ -29,7 +29,7 @@
 
         </asp:GridView>
 
-        <asp:GridView ID="gvHotels" runat="server" CssClass="table" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" ForeColor="Black" AutoGenerateColumns="True" OnSelectedIndexChanged="gvHotels_SelectedIndexChanged" >
+        <asp:GridView ID="gvHotels" runat="server" CssClass="table" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" ForeColor="Black" AutoGenerateColumns="False" OnSelectedIndexChanged="gvHotels_SelectedIndexChanged" ShowFooter="true" >
             <Columns>
                 <asp:CommandField ButtonType="Button" HeaderText="Remove From Cart" SelectText="Remove Item" ShowSelectButton="True" />
                 <asp:BoundField DataField="Hotel" HeaderText="Hotel" />
