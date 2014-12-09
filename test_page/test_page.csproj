@@ -70,7 +70,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </Content>
-    <None Include="Web References\AirService\AirService.disco" />
+    <Content Include="Web References\AirService\AirService.disco" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -99,12 +99,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="css\bootstrap-theme.css.map" />
     <Content Include="css\bootstrap.css.map" />
-    <None Include="Web References\AirService\AirService.wsdl" />
-    <None Include="Web References\AirService\Reference.map">
+    <None Include="Properties\PublishProfiles\jksd.pubxml" />
+    <Content Include="Web References\AirService\AirService.wsdl" />
+    <Content Include="Web References\AirService\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Properties\PublishProfiles\jksd.pubxml" />
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -119,10 +119,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://cis-iis2.temple.edu/Fall2014/cis3342_tuf01657/TermProjectWS/AirService.asmx">
+    <WebReferenceUrl Include="http://cis-iis2.temple.edu/Fall2014/CIS3342_tuf01657/TermProjectWS/AirService.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\AirService\</RelPath>
-      <UpdateFromURL>http://cis-iis2.temple.edu/Fall2014/cis3342_tuf01657/TermProjectWS/AirService.asmx</UpdateFromURL>
+      <UpdateFromURL>http://cis-iis2.temple.edu/Fall2014/CIS3342_tuf01657/TermProjectWS/AirService.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

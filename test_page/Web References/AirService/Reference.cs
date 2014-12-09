@@ -38,11 +38,17 @@ namespace test_page.AirService {
         
         private System.Threading.SendOrPostCallback getCitiesOperationCompleted;
         
+        private System.Threading.SendOrPostCallback getFlightsFromOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getFlightsToOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ReserveSingleOperationCompleted;
+        
         private System.Threading.SendOrPostCallback ReserveOperationCompleted;
         
-        private System.Threading.SendOrPostCallback Reserve1OperationCompleted;
-        
         private System.Threading.SendOrPostCallback GetTableOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback CheckAvailableOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -95,13 +101,22 @@ namespace test_page.AirService {
         public event getCitiesCompletedEventHandler getCitiesCompleted;
         
         /// <remarks/>
+        public event getFlightsFromCompletedEventHandler getFlightsFromCompleted;
+        
+        /// <remarks/>
+        public event getFlightsToCompletedEventHandler getFlightsToCompleted;
+        
+        /// <remarks/>
+        public event ReserveSingleCompletedEventHandler ReserveSingleCompleted;
+        
+        /// <remarks/>
         public event ReserveCompletedEventHandler ReserveCompleted;
         
         /// <remarks/>
-        public event Reserve1CompletedEventHandler Reserve1Completed;
+        public event GetTableCompletedEventHandler GetTableCompleted;
         
         /// <remarks/>
-        public event GetTableCompletedEventHandler GetTableCompleted;
+        public event CheckAvailableCompletedEventHandler CheckAvailableCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetAirCarriers", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -240,10 +255,67 @@ namespace test_page.AirService {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ReserveSingle", RequestElementName="ReserveSingle", RequestNamespace="http://tempuri.org/", ResponseElementName="ReserveSingleResponse", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("ReserveSingleResult")]
-        public bool Reserve(int customerID, int flightID, string seatType, string dateTime) {
-            object[] results = this.Invoke("Reserve", new object[] {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/getFlightsFrom", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataSet getFlightsFrom(int originAirportID) {
+            object[] results = this.Invoke("getFlightsFrom", new object[] {
+                        originAirportID});
+            return ((System.Data.DataSet)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getFlightsFromAsync(int originAirportID) {
+            this.getFlightsFromAsync(originAirportID, null);
+        }
+        
+        /// <remarks/>
+        public void getFlightsFromAsync(int originAirportID, object userState) {
+            if ((this.getFlightsFromOperationCompleted == null)) {
+                this.getFlightsFromOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetFlightsFromOperationCompleted);
+            }
+            this.InvokeAsync("getFlightsFrom", new object[] {
+                        originAirportID}, this.getFlightsFromOperationCompleted, userState);
+        }
+        
+        private void OngetFlightsFromOperationCompleted(object arg) {
+            if ((this.getFlightsFromCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getFlightsFromCompleted(this, new getFlightsFromCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/getFlightsTo", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataSet getFlightsTo(int destinationAirportID) {
+            object[] results = this.Invoke("getFlightsTo", new object[] {
+                        destinationAirportID});
+            return ((System.Data.DataSet)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getFlightsToAsync(int destinationAirportID) {
+            this.getFlightsToAsync(destinationAirportID, null);
+        }
+        
+        /// <remarks/>
+        public void getFlightsToAsync(int destinationAirportID, object userState) {
+            if ((this.getFlightsToOperationCompleted == null)) {
+                this.getFlightsToOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetFlightsToOperationCompleted);
+            }
+            this.InvokeAsync("getFlightsTo", new object[] {
+                        destinationAirportID}, this.getFlightsToOperationCompleted, userState);
+        }
+        
+        private void OngetFlightsToOperationCompleted(object arg) {
+            if ((this.getFlightsToCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getFlightsToCompleted(this, new getFlightsToCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ReserveSingle", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public bool ReserveSingle(int customerID, int flightID, string seatType, string dateTime) {
+            object[] results = this.Invoke("ReserveSingle", new object[] {
                         customerID,
                         flightID,
                         seatType,
@@ -252,35 +324,33 @@ namespace test_page.AirService {
         }
         
         /// <remarks/>
-        public void ReserveAsync(int customerID, int flightID, string seatType, string dateTime) {
-            this.ReserveAsync(customerID, flightID, seatType, dateTime, null);
+        public void ReserveSingleAsync(int customerID, int flightID, string seatType, string dateTime) {
+            this.ReserveSingleAsync(customerID, flightID, seatType, dateTime, null);
         }
         
         /// <remarks/>
-        public void ReserveAsync(int customerID, int flightID, string seatType, string dateTime, object userState) {
-            if ((this.ReserveOperationCompleted == null)) {
-                this.ReserveOperationCompleted = new System.Threading.SendOrPostCallback(this.OnReserveOperationCompleted);
+        public void ReserveSingleAsync(int customerID, int flightID, string seatType, string dateTime, object userState) {
+            if ((this.ReserveSingleOperationCompleted == null)) {
+                this.ReserveSingleOperationCompleted = new System.Threading.SendOrPostCallback(this.OnReserveSingleOperationCompleted);
             }
-            this.InvokeAsync("Reserve", new object[] {
+            this.InvokeAsync("ReserveSingle", new object[] {
                         customerID,
                         flightID,
                         seatType,
-                        dateTime}, this.ReserveOperationCompleted, userState);
+                        dateTime}, this.ReserveSingleOperationCompleted, userState);
         }
         
-        private void OnReserveOperationCompleted(object arg) {
-            if ((this.ReserveCompleted != null)) {
+        private void OnReserveSingleOperationCompleted(object arg) {
+            if ((this.ReserveSingleCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.ReserveCompleted(this, new ReserveCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.ReserveSingleCompleted(this, new ReserveSingleCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.WebMethodAttribute(MessageName="Reserve1")]
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/Reserve", RequestElementName="Reserve", RequestNamespace="http://tempuri.org/", ResponseElementName="ReserveResponse", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("ReserveResult")]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/Reserve", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public bool Reserve(int customerID, int flightID1, string seatType1, string dt1, int flightID2, string seatType2, string dt2) {
-            object[] results = this.Invoke("Reserve1", new object[] {
+            object[] results = this.Invoke("Reserve", new object[] {
                         customerID,
                         flightID1,
                         seatType1,
@@ -292,29 +362,29 @@ namespace test_page.AirService {
         }
         
         /// <remarks/>
-        public void Reserve1Async(int customerID, int flightID1, string seatType1, string dt1, int flightID2, string seatType2, string dt2) {
-            this.Reserve1Async(customerID, flightID1, seatType1, dt1, flightID2, seatType2, dt2, null);
+        public void ReserveAsync(int customerID, int flightID1, string seatType1, string dt1, int flightID2, string seatType2, string dt2) {
+            this.ReserveAsync(customerID, flightID1, seatType1, dt1, flightID2, seatType2, dt2, null);
         }
         
         /// <remarks/>
-        public void Reserve1Async(int customerID, int flightID1, string seatType1, string dt1, int flightID2, string seatType2, string dt2, object userState) {
-            if ((this.Reserve1OperationCompleted == null)) {
-                this.Reserve1OperationCompleted = new System.Threading.SendOrPostCallback(this.OnReserve1OperationCompleted);
+        public void ReserveAsync(int customerID, int flightID1, string seatType1, string dt1, int flightID2, string seatType2, string dt2, object userState) {
+            if ((this.ReserveOperationCompleted == null)) {
+                this.ReserveOperationCompleted = new System.Threading.SendOrPostCallback(this.OnReserveOperationCompleted);
             }
-            this.InvokeAsync("Reserve1", new object[] {
+            this.InvokeAsync("Reserve", new object[] {
                         customerID,
                         flightID1,
                         seatType1,
                         dt1,
                         flightID2,
                         seatType2,
-                        dt2}, this.Reserve1OperationCompleted, userState);
+                        dt2}, this.ReserveOperationCompleted, userState);
         }
         
-        private void OnReserve1OperationCompleted(object arg) {
-            if ((this.Reserve1Completed != null)) {
+        private void OnReserveOperationCompleted(object arg) {
+            if ((this.ReserveCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.Reserve1Completed(this, new Reserve1CompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.ReserveCompleted(this, new ReserveCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -344,6 +414,39 @@ namespace test_page.AirService {
             if ((this.GetTableCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GetTableCompleted(this, new GetTableCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/CheckAvailable", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int CheckAvailable(int flightID, System.DateTime flightDate, string seatClass) {
+            object[] results = this.Invoke("CheckAvailable", new object[] {
+                        flightID,
+                        flightDate,
+                        seatClass});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void CheckAvailableAsync(int flightID, System.DateTime flightDate, string seatClass) {
+            this.CheckAvailableAsync(flightID, flightDate, seatClass, null);
+        }
+        
+        /// <remarks/>
+        public void CheckAvailableAsync(int flightID, System.DateTime flightDate, string seatClass, object userState) {
+            if ((this.CheckAvailableOperationCompleted == null)) {
+                this.CheckAvailableOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCheckAvailableOperationCompleted);
+            }
+            this.InvokeAsync("CheckAvailable", new object[] {
+                        flightID,
+                        flightDate,
+                        seatClass}, this.CheckAvailableOperationCompleted, userState);
+        }
+        
+        private void OnCheckAvailableOperationCompleted(object arg) {
+            if ((this.CheckAvailableCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.CheckAvailableCompleted(this, new CheckAvailableCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -472,17 +575,69 @@ namespace test_page.AirService {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
-    public delegate void ReserveCompletedEventHandler(object sender, ReserveCompletedEventArgs e);
+    public delegate void getFlightsFromCompletedEventHandler(object sender, getFlightsFromCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class ReserveCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class getFlightsFromCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal ReserveCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal getFlightsFromCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataSet Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataSet)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    public delegate void getFlightsToCompletedEventHandler(object sender, getFlightsToCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getFlightsToCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getFlightsToCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataSet Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataSet)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    public delegate void ReserveSingleCompletedEventHandler(object sender, ReserveSingleCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ReserveSingleCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ReserveSingleCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -498,17 +653,17 @@ namespace test_page.AirService {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
-    public delegate void Reserve1CompletedEventHandler(object sender, Reserve1CompletedEventArgs e);
+    public delegate void ReserveCompletedEventHandler(object sender, ReserveCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class Reserve1CompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class ReserveCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal Reserve1CompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal ReserveCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -544,6 +699,32 @@ namespace test_page.AirService {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((System.Data.DataSet)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    public delegate void CheckAvailableCompletedEventHandler(object sender, CheckAvailableCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class CheckAvailableCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal CheckAvailableCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
             }
         }
     }

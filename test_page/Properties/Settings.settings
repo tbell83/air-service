@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="test_page_AirService_AirService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://cis-iis2.temple.edu/Fall2014/cis3342_tuf01657/TermProjectWS/AirService.asmx</Value>
+      <Value Profile="(Default)">http://cis-iis2.temple.edu/Fall2014/CIS3342_tuf01657/TermProjectWS/AirService.asmx</Value>
     </Setting>
   </Settings>
 </SettingsFile>

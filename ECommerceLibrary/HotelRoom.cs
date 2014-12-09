@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ECommerceLibrary
 {
+    [Serializable]
     public class HotelRoom
     {
         private int roomID;

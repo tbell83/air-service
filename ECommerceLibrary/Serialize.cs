@@ -56,6 +56,19 @@ namespace ECommerceLibrary
             return deserializedObject;
         }
 
+        public int GetCustomerIDFromEmail(string email)
+        {
+            DataSet ds = new DataSet();
+            SqlCommand objCommand = new SqlCommand();
+            objCommand.CommandText = "GetCustomerIDFromEmail"; 
+            objCommand.CommandType = CommandType.StoredProcedure;
+
+            objCommand.Parameters.AddWithValue("@email", email);
+            ds = objDB.GetDataSetUsingCmdObj(objCommand);
+
+            int custID = Convert.ToInt32(ds.Tables[0].Rows[0]["customerID"]);
+            return custID;
+        }
 
         // This function writes the cart to the database.
         public int WriteCartToDB(Object cart, string email)

@@ -192,7 +192,7 @@
                 <asp:BoundField DataField="Name" HeaderText="Hotel" />
                 <asp:BoundField DataField="RoomID" HeaderText="RoomID" />
                 <asp:BoundField DataField="RoomNum" HeaderText="Room Number" />
-                <asp:BoundField DataField="Price" DataFormatString="{0:c}" HeaderText="Price" />
+                <asp:BoundField DataField="Price" HeaderText="Price ($)" />
                 <asp:BoundField DataField="Reserved" HeaderText="Reserved" />
             </Columns>
         </asp:GridView>
