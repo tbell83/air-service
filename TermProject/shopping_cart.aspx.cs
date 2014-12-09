@@ -99,7 +99,7 @@ namespace TermProject
                 cust.CustID = customerID;
 
                 hotelProxy.Reserve(room, cust); 
-                
+
             }
         }
 
