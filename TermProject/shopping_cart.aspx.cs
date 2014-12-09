@@ -43,12 +43,15 @@ namespace TermProject
                 gvFlights.DataBind();
             }catch{}
 
-            gvCars.DataSource = cart.CarReservations;
-            gvCars.DataBind();
-            gvHotels.DataSource = cart.HotelReservations;
-            gvHotels.DataBind();
+            try{
+                gvCars.DataSource = cart.CarReservations;
+                gvCars.DataBind();
+            }catch{}
 
-
+            try{
+                gvHotels.DataSource = cart.HotelReservations;
+                gvHotels.DataBind();
+            }catch{}
         }
 
         protected void btnLogOut_Click(object sender, EventArgs e)
