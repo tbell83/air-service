@@ -98,32 +98,48 @@ namespace TermProject
 
         protected void btnReserve_Click(object sender, EventArgs e)
         {
+            
             VacationPackage cart = (VacationPackage)Session["cart"];
+
+            if (cart.EventReservations.Count == 0 && cart.HotelReservations.Count == 0 && cart.CarReservations.Count == 0 && cart.FlightReservations.Count == 0)
+            {
+                Response.Redirect("dashboard.aspx"); //if the cart is empty, have the make reservatiosn button just direct people back to the dashboard
+            }
 
             Serialize s = new Serialize();
             string email = Session["user"].ToString();
             int customerID = s.GetCustomerIDFromEmail(email); 
 
             //iterate events
+            if (cart.EventReservations.Count > 0 )
+            {
             DataSet events = (DataSet)cart.EventReservations[0];
             EventService.WS eventService = new EventService.WS();
             foreach(DataRow row in events.Tables[0].Rows){
                 eventService.Reserve((int)row[0], customerID);
+                }
             }
 
             //iterate flights
-            DataSet flights = (DataSet)cart.FlightReservations[0];
-            AirService.AirService airService = new AirService.AirService();
-            foreach(DataRow row in flights.Tables[0].Rows){
-                int flightID = (int)row[0];
-                string seatType = "First Class";
-                if(row[5] != ""){
-                    seatType = "Economy";
+            if (cart.FlightReservations.Count > 0)
+            {
+                DataSet flights = (DataSet)cart.FlightReservations[0];
+                AirService.AirService airService = new AirService.AirService();
+                foreach (DataRow row in flights.Tables[0].Rows)
+                {
+                    int flightID = (int)row[0];
+                    string seatType = "First Class";
+                    if (row[5] != "")
+                    {
+                        seatType = "Economy";
+                    }
+                    string date = (string)row[5];
+                    try
+                    {
+                        airService.ReserveSingle(customerID, flightID, seatType, date);
+                    }
+                    catch { }
                 }
-                string date = (string)row[5];
-                try{
-                    airService.ReserveSingle(customerID, flightID, seatType, date);
-                }catch{}
             }
 
             //iterate through cars
@@ -154,8 +170,10 @@ namespace TermProject
 
             cart = new VacationPackage();
             Session["cart"] = cart;
-            Response.Redirect("shopping_cart.aspx"); 
+            Response.Redirect("shopping_cart.aspx");
 
+            lblResponse.Visible = true;
+            btnReserve.Enabled = false; 
         }
 
         protected void gvFlights_SelectedIndexChanged(object sender, EventArgs e){
@@ -179,6 +197,8 @@ namespace TermProject
             gvEvents.DataSource = events;
             gvEvents.DataBind();
         }
+
+       
 
         
     }
